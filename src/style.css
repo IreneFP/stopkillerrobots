@@ -1,0 +1,141 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body
+{
+    overflow: hidden;
+}
+
+.webgl
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+}
+
+
+.begin
+{
+    position: absolute;
+    /* place-items: center; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Raleway';
+    font-weight: 900;
+    font-size: 200px;
+    color: white;
+}
+
+.begin_stroke
+{
+    position: absolute;
+    /* place-items: center; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Raleway';
+    font-weight: 900;
+    font-size: 200px;
+    color: rgba(0, 0, 0, 0);
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
+}
+
+.background
+{
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    opacity: 60%;
+}
+
+#element {
+    font-family: 'Inria Sans';
+    color: red;
+}
+
+.div {
+    display: flex;
+    flex-direction: column;
+    max-width: 2060px;  
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 70px;
+    padding-right: 70px;
+    padding-bottom: 30000px;
+    padding-left: 70px;
+    background-color: rgb(0, 0, 0);
+}
+
+.in-front{
+    display: flex;
+    flex-direction: column;
+    max-width: 2060px;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+.text-top-left {
+    max-width: 442px;
+    /* max-width: 1258px; */
+    color: rgba(255, 255, 255, 1);
+    font-size: 70px;
+    letter-spacing: 0%;
+    text-align: left;
+    font-family: "Inria Sans", sans-serif;
+}
+
+.text-empty {
+    max-width: 1258px;
+    margin-top: 75px;
+    color: rgba(255, 255, 255, 1);
+    font-size: 70px;
+    letter-spacing: 0%;
+    text-align: center;
+    font-family: "Inria Sans", sans-serif;
+}
+
+.in-front {
+    z-index: 1;
+}
+/* #text1 {
+    transition: all 0.5s ease-out;    
+} */
+canvas {
+    transition: all 0.5s ease-out;
+    opacity: 1;
+}
+.opacity-zero {
+    opacity: 0;
+}
+.opacity-one {
+    opacity: 1;
+}
+.new-position-phase-2 {
+    background-color: aqua;
+}
+
+.image {
+    object-fit: contain;
+    object-position: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+.image-sizer {
+    width: 100%;
+    padding-top: 56.25%;
+    pointer-events: none;
+    font-size: 0;
+}
