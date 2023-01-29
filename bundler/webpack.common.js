@@ -24,8 +24,8 @@ module.exports = {
             minify: true
         }),
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, '../src/begin.html'),
-            filename: 'begin.html',
+            template: path.resolve(__dirname, '../src/history.html'),
+            filename: 'history.html',
             minify: {
                 removeComments: true,
                 collapseWhitespace: true
