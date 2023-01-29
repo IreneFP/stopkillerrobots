@@ -7,12 +7,18 @@
   justify-content: space-around;
   padding-top: 10%;
 }
+.single-table {
+  border-left: 4px solid yellow;
+  padding-left: 40px;
+}
 td {
   padding: 10px;
 }
 td:nth-child(1) {
-  font-size: larger;
   color: red;
+}
+td:nth-child(2) {
+  color: white;
 }
 
 table {
