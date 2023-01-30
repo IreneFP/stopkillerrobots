@@ -4,21 +4,33 @@
 }
 .main-data-container {
   display: flex;
-  justify-content: space-around;
-  padding-top: 10%;
+  justify-content: space-evenly;
+  padding-top: 32%;
 }
 .single-table {
-  border-left: 4px solid yellow;
-  padding-left: 40px;
+  border-left: 10px solid white;
+  padding-left: 20px;
+  font-size: 25px;
+  font-weight: bold;
 }
 td {
-  padding: 10px;
+  padding: 5px;
 }
 td:nth-child(1) {
-  color: red;
-}
-td:nth-child(2) {
   color: white;
+}
+
+#bluecolor{
+    color:#3C7AF2 
+}
+
+#yellowcolor{
+    color:#C3F23C 
+}
+
+#container {
+    z-index: 3;
+
 }
 
 table {
@@ -98,19 +110,6 @@ body {
   color: white;
 }
 
-/* .begin:hover {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: "Raleway";
-  font-weight: 50;
-  font-size: 200px;
-  color: rgba(0, 0, 0, 0);
-  -webkit-text-stroke-width: 4px;
-  -webkit-text-stroke-color: white;
-} */
-
 .background {
   position: absolute;
   top: 0;
@@ -120,6 +119,26 @@ body {
   background-color: black;
   opacity: 60%;
 }
+
+.background-history {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    opacity: 0;
+  }
+
+.background-compare {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    opacity: 1;
+  }
 
 #element {
   font-family: "Inria Sans";

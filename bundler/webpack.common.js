@@ -32,8 +32,8 @@ module.exports = {
             }
         }),
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, '../src/compare.html'),
-            filename: 'compare.html',
+            template: path.resolve(__dirname, '../src/compare-face2.html'),
+            filename: 'compare-face2.html',
             minify: {
                 removeComments: true,
                 collapseWhitespace: true

@@ -3,19 +3,6 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-// -----------------------------------------------------------------------------------
-
-var bar = new ProgressBar.Line(container, {
-  strokeWidth: 1,
-  easing: "easeInOut",
-  duration: 1400,
-  color: "yellow",
-  trailColor: "white",
-  trailWidth: 1,
-  svgStyle: { width: "100%", height: "100%" },
-});
-
-bar.animate(1.0); // Number from 0.0 to 1.0
 
 // -----------------------------------------------------------------------------------
 // TEXT LOAD
@@ -29,11 +16,6 @@ WebFont.load({
   },
 });
 
-// setTimeout(function() {
-//     // document.getElementById('element').innerHTML += '<br>More text';
-//     // document.getElementsByClassName('how-does-your-brain-recognize').innerHTML += 'MORE'
-//     console.log(document.getElementsByClassName('how-does-your-brain-recognize').innerHTML)
-// }, 1000);
 
 // -----------------------------------------------------------------------------------
 
@@ -53,21 +35,19 @@ const canvas = document.querySelector("canvas.webgl");
 
 // Scene
 const scene = new THREE.Scene();
-// scene.background = new THREE.Color( 0x000000);
-
 const axeshelper = new THREE.AxesHelper();
 // scene.add(axeshelper)
 
 // LEFT FACE
-gltfLoader.load("/models/faces21.glb", (gltf) => {
+gltfLoader.load("/models/faces11.glb", (gltf) => {
   // gltf.scene.scale.set(9, 9, 9) // face 1
   gltf.scene.scale.set(7.5, 7.5, 7.5); // face 2
   // gltf.scene.scale.set(10, 10, 10) // face 3
 
   gltf.scene.position.set(-7, -1, 0);
   gltf.scene.name = "face-left";
-  gltf.scene.children[0].material.opacity = 0;
-  gltf.scene.children[0].material.transparent = true;
+  // gltf.scene.children[0].material.opacity = 0;
+  // gltf.scene.children[0].material.transparent = true;
   scene.add(gltf.scene);
 });
 
@@ -86,15 +66,15 @@ gltfLoader.load("/models/faces21 - linechin.glb", (gltf) => {
 });
 
 // RIGHT FACE
-gltfLoader.load("/models/faces22.glb", (gltf) => {
+gltfLoader.load("/models/faces12.glb", (gltf) => {
   // gltf.scene.scale.set(9, 9, 9) // face 1
   gltf.scene.scale.set(7, 7, 7); //face 2
   // gltf.scene.scale.set(10, 10, 10) // face 3
 
   gltf.scene.position.set(7, -1, 0);
   gltf.scene.name = "face-right";
-  gltf.scene.children[0].material.opacity = 0;
-  gltf.scene.children[0].material.transparent = true;
+  // gltf.scene.children[0].material.opacity = 0;
+  // gltf.scene.children[0].material.transparent = true;
   scene.add(gltf.scene);
 });
 
@@ -179,11 +159,55 @@ renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setClearColor(0xffffff, 0); // uncomment for white background
 
-/**
- * Animate
- */
-const clock = new THREE.Clock();
+// -----------------------------------------------------------------------------------
+// ANIMATION
+//
 
+var dictTimes = {
+  Scene1: 1,
+  Scene11: 4,
+  Scene12: 8,
+  Scene2: 12,
+  Scene3: 17,
+  Scene31: 22,
+  Scene4: 30,
+  Scene5: 40,
+  Scene6: 10,
+};
+
+  // var dictTimes = {
+  //   "Scene1":     1,
+  //   "Scene11":    1,
+  //   "Scene12":    1,
+  //   "Scene2":     1,
+  //   "Scene3":     1,
+  //   "Scene31":    1,
+  //   "Scene4":     1,
+  //   "Scene5":     5,
+  //   "Scene6":     50,
+  // };
+// -----------------------------------------------------------------------------------
+// PROGRESS BAR
+//
+const url = window.location.href.split("/")
+if (url[url.length - 1] == "history.html") {
+    var bar = new ProgressBar.Line(container, {
+        strokeWidth: 0.5,
+        easing: "easeInOut",
+        duration: 30000, // seconds * 1000
+        color: "yellow",
+        trailColor: "white",
+        trailWidth: 1,
+        svgStyle: { width: "100%", height: "100%" },
+      });
+      
+      bar.animate(1.0); // Number from 0.0 to 1.0
+}
+
+
+// -----------------------------------------------------------------------------------
+// FUNCTIONS
+//
 function normalize(val, min, max) {
   // Shift to positive to avoid issues when crossing the 0 line
   if (min < 0) {
@@ -205,82 +229,55 @@ function lerpAnimation(object, endpoint, time, min, max) {
   }
 }
 
-function opacityAnimation(object, time, min, max) {
-  let alpha = normalize(time, min, max);
-  if (alpha < 1) {
-    object.children[0].material.opacity = alpha;
+function opacityBackground(id){
+  if (alpha > 0) {
+    document.getElementById(id).style.opacity = alpha
+    alpha -= 0.01
   }
-  // else{
-  //     object.position.copy(endpoint)
-  // }
+  else{
+    document.getElementById(id).style.opacity = 0
+  }
 }
 
-var dictTimes = {
-  Scene1: 1,
-  Scene11: 4,
-  Scene12: 8,
-  Scene2: 12,
-  Scene3: 17,
-  Scene31: 22,
-  Scene4: 30,
-};
+// -----------------------------------------------------------------------------------
+// TICK
+//
 
-//   var dictTimes = {
-//     "Scene1":     1,
-//     "Scene11":    1,
-//     "Scene12":    1,
-//     "Scene2":     1,
-//     "Scene3":     300,
-//     "Scene31":    220,
-//     "Scene4":     300
-//   };
-
+let alpha = 1
 let startTime = 0;
+const clock = new THREE.Clock();
 
 const tick = () => {
   // Clock
   const elapsedTime = clock.getElapsedTime();
-
+  // console.log(elapsedTime)
   // Update object
   const tmp = window.location.href.split("/");
   const delay = 0.6;
   const rangeMovement = 0.2;
-  if (elapsedTime > 1) {
-    scene.getObjectByName("face-right").rotation.y =
-      Math.sin(elapsedTime * delay) * rangeMovement;
-    scene.getObjectByName("face-left").rotation.y =
-      Math.sin(elapsedTime * delay) * rangeMovement;
-    scene.getObjectByName("face-left-chin").rotation.y =
-      Math.sin(elapsedTime * delay) * rangeMovement;
-    scene.getObjectByName("face-right-chin").rotation.y =
-      Math.sin(elapsedTime * delay) * rangeMovement;
-    scene.getObjectByName("face-left-profile").rotation.y =
-      Math.sin(elapsedTime * delay) * rangeMovement;
-    scene.getObjectByName("face-right-profile").rotation.y =
-      Math.sin(elapsedTime * delay) * rangeMovement;
+  
+  if (elapsedTime > 2) {
+    scene.getObjectByName("face-right").rotation.y = Math.sin(elapsedTime * delay) * rangeMovement;
+    scene.getObjectByName("face-left").rotation.y = Math.sin(elapsedTime * delay) * rangeMovement;
+    scene.getObjectByName("face-left-chin").rotation.y = Math.sin(elapsedTime * delay) * rangeMovement;
+    scene.getObjectByName("face-right-chin").rotation.y = Math.sin(elapsedTime * delay) * rangeMovement;
+    scene.getObjectByName("face-left-profile").rotation.y = Math.sin(elapsedTime * delay) * rangeMovement;
+    scene.getObjectByName("face-right-profile").rotation.y = Math.sin(elapsedTime * delay) * rangeMovement;
 
-    // opacityAnimation(scene.getObjectByName('face-left'), elapsedTime, startTime, startTime+2)
-    // opacityAnimation(scene.getObjectByName('face-right'), elapsedTime, startTime, startTime+2)
   }
   if (tmp[tmp.length - 1] == "") {
-    if (elapsedTime > 1) {
-      opacityAnimation(
-        scene.getObjectByName("face-left"),
-        elapsedTime,
-        startTime,
-        startTime + 2
-      );
-      opacityAnimation(
-        scene.getObjectByName("face-right"),
-        elapsedTime,
-        startTime,
-        startTime + 2
-      );
+    document.getElementById("background-history-id").style.opacity = 1
+    if (elapsedTime > 2) {
+      opacityBackground("background-history-id")
     }
   }
 
   // Script for History
   if (tmp[tmp.length - 1] == "history.html") {
+    document.getElementById("background-history-id").style.opacity = 1
+    if (elapsedTime > 2) {
+      opacityBackground("background-history-id")
+    }
     // -------------------- Scene 1
     if (elapsedTime > dictTimes["Scene1"]) {
       startTime = dictTimes["Scene1"];
@@ -290,19 +287,6 @@ const tick = () => {
       scene
         .getObjectByName("face-right")
         .position.copy(new THREE.Vector3(11, -3, 0));
-
-      opacityAnimation(
-        scene.getObjectByName("face-left"),
-        elapsedTime,
-        startTime,
-        startTime + 1
-      );
-      opacityAnimation(
-        scene.getObjectByName("face-right"),
-        elapsedTime,
-        startTime,
-        startTime + 1
-      );
     }
     // -------------------- Scene 1.1
     if (elapsedTime > dictTimes["Scene11"]) {
@@ -313,7 +297,6 @@ const tick = () => {
     // -------------------- Scene 1.2
     if (elapsedTime > dictTimes["Scene12"]) {
       startTime = dictTimes["Scene12"];
-      console.log(startTime);
       document.getElementById("text2").innerHTML =
         "How do you know you’ve seen a friend across the road, or spot your child at school?";
     }
@@ -465,16 +448,41 @@ const tick = () => {
     // -------------------- Scene 4
     if (elapsedTime > dictTimes["Scene4"]) {
       startTime = dictTimes["Scene4"];
-      // document.getElementById('text1').style.alignItems = "flex-start"
       document.getElementById("text1").style.padding =
         "148px 226px 148px 226px";
-      // document.getElementById('text2').style.textAlign = "center"
+
       document.getElementById("text2").style.maxWidth = "1467px";
       document.getElementById("text2").style.fontSize = "180px";
       document.getElementById("text2").innerHTML =
         "These faces have a match percentage of 98%";
       document.getElementById("text3").innerHTML = "";
     }
+    
+    if (elapsedTime > dictTimes["Scene5"]) {
+      window.location.href = window.location.href.split("/")[0] + '/compare-face2.html'
+      // document.getElementById("background-compare-id").style.opacity = 1
+
+    }
+  }
+    // -------------------- Scene 5
+    if (tmp[tmp.length - 1] == "compare-face2.html") {
+      document.getElementById("background-compare-id").style.opacity = 1
+      if (elapsedTime > 1) {
+        opacityBackground("background-compare-id")
+        scene.getObjectByName("face-left").position.x = 15
+        scene.getObjectByName("face-left").position.y = 2
+        scene.getObjectByName("face-right").position.x = -15
+        scene.getObjectByName("face-right").position.y = 2
+        camera.position.z = 300
+      }
+
+
+    
+    }
+
+
+  // -------------------- Scene 6    
+  if (elapsedTime > dictTimes["Scene6"]) {
   }
 
   // Update controls
