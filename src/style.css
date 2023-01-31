@@ -2,6 +2,32 @@
   margin: 0;
   padding: 0;
 }
+
+.split {
+  height: 100%;
+  width:33%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.left {
+  left: 0;
+}
+
+/* Control the right side */
+.right {
+  right: 0;
+}
+
+.center {
+  left: 33.5%;
+}
+
+
+
 .main-data-container {
   display: flex;
   justify-content: space-evenly;
@@ -30,7 +56,13 @@ td:nth-child(1) {
 
 #container {
     z-index: 3;
-
+    position: absolute;
+    bottom: 0px;
+    margin: 20px;
+    width: 800px;
+    height: 6px;
+    left: 50%;
+    margin-left: -400px;
 }
 
 table {

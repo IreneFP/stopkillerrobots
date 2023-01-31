@@ -24,8 +24,16 @@ module.exports = {
             minify: true
         }),
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, '../src/history.html'),
-            filename: 'history.html',
+            template: path.resolve(__dirname, '../src/history1.html'),
+            filename: 'history1.html',
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true
+            }
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, '../src/compare-face1.html'),
+            filename: 'compare-face1.html',
             minify: {
                 removeComments: true,
                 collapseWhitespace: true
@@ -39,6 +47,39 @@ module.exports = {
                 collapseWhitespace: true
             }
         }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, '../src/compare-face3.html'),
+            filename: 'compare-face3.html',
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true
+            }
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, '../src/explore.html'),
+            filename: 'explore.html',
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true
+            }
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, '../src/history2.html'),
+            filename: 'history2.html',
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true
+            }
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, '../src/history3.html'),
+            filename: 'history3.html',
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true
+            }
+        }),
+
         new MiniCSSExtractPlugin()
         
     ],
