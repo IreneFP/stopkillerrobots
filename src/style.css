@@ -26,7 +26,33 @@
   left: 33.5%;
 }
 
+.text-explore{
+  color: rgba(255, 255, 255, 1);
+  font-size: 70px;
+  letter-spacing: 0%;
+  margin: 20px;
+  margin-top: 80px;
+  text-align: center;
+  font-family: "Inria Sans", sans-serif;
+  z-index: 1;
+}
 
+
+.bluerect{
+  opacity:0%;
+}
+
+.yellowrect{
+  opacity:0%;
+}
+
+.circleyellow {
+  width: 650px;
+  /* margin-left: 50px; */
+  margin-top: 80px;
+  /* transform: rotate(5deg); */
+  /* opacity: 50%; */
+}
 
 .main-data-container {
   display: flex;

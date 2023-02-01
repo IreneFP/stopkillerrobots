@@ -2,6 +2,8 @@ import "./style.css";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { lerp } from "three/src/math/MathUtils";
+// import { WireframeGeometry2 } from 'three/examples/jsm/WireframeGeometry2.js'; /// I HAVE IMPORTED THIS BUT I HAVE NOT INSTALLED IT!
 
 
 // -----------------------------------------------------------------------------------
@@ -108,11 +110,17 @@ renderer.setClearColor(0xffffff, 0); // uncomment for white background
 //
 
 const folder_name = ['face1/', 'face2/', 'face3/']
+const faceSizes = {
+  'face1/': [9, 9],
+  'face2/': [7.5, 6.8],
+  'face3/': [9, 7.5],
+}
+
 
 folder_name.forEach((facename) => {
     // LEFT FACE ----
     gltfLoader.load("/models/"+facename+"1-face.glb", (gltf) => {
-      gltf.scene.scale.set(7.5, 7.5, 7.5);
+      gltf.scene.scale.set(faceSizes[facename][0], faceSizes[facename][0], faceSizes[facename][0]);
       gltf.scene.position.set(-7, -1, 0);
       gltf.scene.name = "face-left" + facename;
       gltf.scene.visible = false;
@@ -120,7 +128,7 @@ folder_name.forEach((facename) => {
     });
 
     gltfLoader.load("/models/"+facename+"1-linechin.glb", (gltf) => {
-      gltf.scene.scale.set(7.5, 7.5, 7.5);
+      gltf.scene.scale.set(faceSizes[facename][0], faceSizes[facename][0], faceSizes[facename][0]);
       gltf.scene.position.set(-7, -1, 0);
       gltf.scene.name = "face-left-chin" + facename;
       gltf.scene.visible = false;
@@ -128,7 +136,7 @@ folder_name.forEach((facename) => {
     });
 
     gltfLoader.load("/models/"+facename+"1-lineprofile.glb", (gltf) => {
-      gltf.scene.scale.set(7.5, 7.5, 7.5);
+      gltf.scene.scale.set(faceSizes[facename][0], faceSizes[facename][0], faceSizes[facename][0]);
       gltf.scene.position.set(-2, 0.8, -5);
       gltf.scene.name = "face-left-profile" + facename;
       gltf.scene.visible = false;
@@ -137,7 +145,7 @@ folder_name.forEach((facename) => {
 
     // RIGHT FACE ----
     gltfLoader.load("/models/"+facename+"2-face.glb", (gltf) => {
-      gltf.scene.scale.set(7, 7, 7);
+      gltf.scene.scale.set(faceSizes[facename][1], faceSizes[facename][1], faceSizes[facename][1]);
       gltf.scene.position.set(7, -1, 0);
       gltf.scene.name = "face-right" + facename;
       gltf.scene.visible = false;
@@ -145,7 +153,7 @@ folder_name.forEach((facename) => {
     });
 
     gltfLoader.load("/models/"+facename+"2-linechin.glb", (gltf) => {
-      gltf.scene.scale.set(7, 7, 7);
+      gltf.scene.scale.set(faceSizes[facename][1], faceSizes[facename][1], faceSizes[facename][1]);
       gltf.scene.position.set(7, -1, 0);
       gltf.scene.name = "face-right-chin" + facename;
       gltf.scene.visible = false;
@@ -153,7 +161,7 @@ folder_name.forEach((facename) => {
     });
 
     gltfLoader.load("/models/"+facename+"2-lineprofile.glb", (gltf) => {
-      gltf.scene.scale.set(7, 7, 7);
+      gltf.scene.scale.set(faceSizes[facename][1], faceSizes[facename][1], faceSizes[facename][1]);
       gltf.scene.position.set(11, 0.8, -5);
       gltf.scene.name = "face-right-profile" + facename;
       gltf.scene.visible = false;
@@ -238,6 +246,38 @@ gltfLoader.load("/models/face3/1-face.glb", (gltf) => {
   scene.add(gltf.scene);
 });
 
+// FOR FINAL
+
+// gltfLoader.load("/models/face1/2-face.glb", (gltf) => {
+//   gltf.scene.scale.set(9, 9, 9);
+//   gltf.scene.position.set(-2, -1, 0);
+//   gltf.scene.name = "faces11-nohead";
+//   gltf.scene.visible = false;
+//   // gltf.scene.traverse((node) => {
+//   //   if (!node.isMesh) return;
+//   //   node.material.wireframe = true;
+//   // });
+//   // gltf.scene.children[0].material.color.setHex(0xC3F23C)
+
+//   scene.add(gltf.scene);
+// });
+
+// gltfLoader.load("/models/face1/1-face.glb", (gltf) => {
+//   gltf.scene.scale.set(9, 9, 9);
+//   gltf.scene.position.set(11, -1, 0);
+//   gltf.scene.name = "faces12-nohead";
+//   gltf.scene.visible = false;
+//   // gltf.scene.traverse((node) => {
+//   //   if (!node.isMesh) return;
+//   //   node.material.wireframe = true;
+//   // });
+//   // gltf.scene.children[0].material.color.setHex(0x3C7AF2)
+//   scene.add(gltf.scene);
+// });
+
+
+
+
 
 // -----------------------------------------------------------------------------------
 // ANIMATION
@@ -255,6 +295,12 @@ var dictTimes1 = {
   Scene4: 34,
   Scene5: 42,
   Scene6: 10,
+  Scene61: 5,
+  Scene62: 10,
+  Scene7: 15,
+  Scene8: 20,
+  Scene9: 25,
+  Scene10: 30,
 };
 
 var dictTimes23 = {
@@ -326,6 +372,31 @@ function opacityBackground(id){
   }
 }
 
+///
+
+// let wireframe, camera2;
+// let wireframe1;
+// let matLine, matLineBasic, matLineDashed;
+// let stats;
+// let gui;
+
+// let geo = new THREE.IcosahedronGeometry( 20, 1 );
+// const geometry2 = new WireframeGeometry2( geo );
+// matLine = new LineMaterial( {
+
+//   color: 0x4080ff,
+//   linewidth: 5, // in pixels
+//   //resolution:  // to be set by renderer, eventually
+//   dashed: false
+
+// } );
+
+// wireframe = new Wireframe( geometry2, matLine );
+// wireframe.computeLineDi2stances();
+// wireframe.scale.set( 1, 1, 1 );
+// scene.add( wireframe );
+
+
 // -----------------------------------------------------------------------------------
 // RAYCASTER
 //
@@ -370,7 +441,7 @@ function onClick(event) {
 // -----------------------------------------------------------------------------------
 // TICK FUNCTION
 //
-
+var rectopacity = 0
 const cameramovementdelay = 4
 const objectsmovementdelay = 2
 let alpha = 1
@@ -963,7 +1034,7 @@ const tick = () => {
       camera.position.z = 300
     }
     if (elapsedTime > dictTimes1["Scene6"]) {
-      window.location.href = window.location.href.split("/")[0] + '/explore.html'
+      window.location.href = window.location.href.split("/")[0] + '/final.html'
     }
   }
   // SCRIPT FOR COMPARE 2 [scene 5]
@@ -1007,7 +1078,7 @@ const tick = () => {
 }
 
 ////////////// -----------------------------------------------------------------------------------------------------
-  // SCRIPT FOR HISTORY (ALL) [scene 6]
+  // SCRIPT FOR EXPLORE (ALL) [scene 6]
   if (tmp[tmp.length - 1] == "explore.html") {
     document.getElementById("background-history-id").style.opacity = 1
     if (elapsedTime > initdelay) {
@@ -1027,7 +1098,95 @@ const tick = () => {
       window.addEventListener('click', onClick);
     }
   }
+////////////// -----------------------------------------------------------------------------------------------------
+  // SCRIPT FOR FINAL
+  if (tmp[tmp.length - 1] == "final.html") {
+    document.getElementById("background-history-id").style.opacity = 1
+    
+    // -------------------- Scene 6
+    if (elapsedTime > initdelay) {
+      opacityBackground("background-history-id")
+      scene.getObjectByName("face-leftface1/").visible = true;
+      scene.getObjectByName("face-rightface1/").visible = true;
+      scene.getObjectByName("face-leftface1/").rotation.y = Math.sin(elapsedTime * delay) * rangeMovement;
+      scene.getObjectByName("face-rightface1/").rotation.y = Math.sin(elapsedTime * delay) * rangeMovement;
+      scene.getObjectByName("face-leftface1/").traverse((node) => {
+      if (!node.isMesh) return;
+        node.material.wireframe = true;
+      });
+      scene.getObjectByName("face-rightface1/").traverse((node) => {
+      if (!node.isMesh) return;
+        node.material.wireframe = true;
+      });
+      camera.position.copy(new THREE.Vector3(0, 4, 100)) 
+      scene.getObjectByName("face-leftface1/").position.copy(new THREE.Vector3(-6.5, -5, 0))
+      scene.getObjectByName("face-rightface1/").position.copy(new THREE.Vector3(6.5, -5, 0))
+      
+      // -------------------- Scene 6.1
+      if (elapsedTime > dictTimes1["Scene61"]) {
+        document.getElementById("bluerect").style.opacity = rectopacity
+        document.getElementById("yellowrect").style.opacity = rectopacity
+        rectopacity += 0.01
+        // names appear
+      }
+      // -------------------- Scene 6.2
+      if (elapsedTime > dictTimes1["Scene62"]) {
+        // Names disapear
+        document.getElementById("text-final").innerHTML = "Or predict that two pictures from the <u>same person</u> belong to two different people.";
+      }
+      if (elapsedTime > dictTimes1["Scene62"]+2) {
+        document.getElementById("yellowrect").style.fill = '#3C7AF2'
+        // Names appear
+      }
 
+      // -------------------- Scene 7
+      if (elapsedTime > dictTimes1["Scene7"]) {
+
+        lerpAnimation(
+          camera,
+          new THREE.Vector3(20, 0, 80),
+          elapsedTime,
+          startTime,
+          startTime + cameramovementdelay
+        );  
+        
+        lerpAnimation(
+          scene.getObjectByName("face-leftface1/"),
+          new THREE.Vector3(-10, 0.8, -15),
+          elapsedTime,
+          startTime,
+          startTime + objectsmovementdelay
+        );
+        lerpAnimation(
+          scene.getObjectByName("face-rightface1/"),
+          new THREE.Vector3(8, 0.8, -15),
+          elapsedTime,
+          startTime,
+          startTime + objectsmovementdelay
+        );
+  
+        document.getElementById("text-final").innerHTML = 'Why is this a problem? The biometric data can be linked to your name, school, or criminal history.<br><br>Can you think about any potential negative consequences?'
+
+        // -------------------- Scene 8
+        if (elapsedTime > dictTimes1["Scene8"]) {
+          // TODO
+        }
+
+        // -------------------- Scene 9
+        if (elapsedTime > dictTimes1["Scene9"]) {
+          // TODO
+        }
+        
+        // -------------------- Scene 10
+        if (elapsedTime > dictTimes1["Scene10"]) {
+          window.location.href = window.location.href.split("/")[0] + '/explore.html'
+        }
+
+      }
+    }
+    
+    
+  }
   // Update controls
   controls.update();
 

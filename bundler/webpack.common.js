@@ -79,6 +79,23 @@ module.exports = {
                 collapseWhitespace: true
             }
         }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, '../src/final.html'),
+            filename: 'final.html',
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true
+            }
+        }),
+
+        // new HtmlWebpackPlugin({
+        //     template: path.resolve(__dirname, '../src/test.html'),
+        //     filename: 'test.html',
+        //     minify: {
+        //         removeComments: true,
+        //         collapseWhitespace: true
+        //     }
+        // }),
 
         new MiniCSSExtractPlugin()
         
