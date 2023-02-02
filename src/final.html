@@ -14,21 +14,37 @@
     ></script>
   </head>
   <body>
-    <canvas class="webgl" id="main-canvas"></canvas>
+    <canvas class="webgl" id="main-canvas" style="z-index: -1"></canvas>
     <div class="background-history" id="background-history-id"></div>
 
-    <div class="text-explore" id="text-final">Sometimes, the system will make <span style='color: #FF4A4A'>mistakes</span> and match two <u>different people</u> as the same person</div>
-    
-    <svg width="2000" height="80">
+    <div class="text-explore" id="text-final">
+      Sometimes, the system will make
+      <span style="color: #ff4a4a">mistakes</span> and match two
+      <u>different people</u> as the same person
+    </div>
+
+    <div style="display: flex; justify-content: space-around; padding-top: 23%">
+      <div style="background-color: #ff4a4a; width: 40%; height: 80px">
+        Max A
+      </div>
+      <div
+        style="
+          opacity: 0.5;
+          background-color: aqua;
+          width: 40%;
+          height: 80px;
+          padding-left: 40px;
+        "
+      >
+        Liz B
+      </div>
+    </div>
+
+    <!-- <svg width="2000" height="80">
       <rect class="bluerect" id="bluerect" width=50% height="80" fill="#3C7AF2" margin-left="10px"/>
     </svg>  
     <svg width="2000" height="100">
       <rect class="yellowrect" id="yellowrect" width=50% height="100" fill="#C3F23C" margin-left="10px"/>
-    </svg> 
-
-    
-
-
-
+    </svg>  -->
   </body>
 </html>
