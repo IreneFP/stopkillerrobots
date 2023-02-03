@@ -134,7 +134,7 @@ folder_name.forEach((facename) => {
       faceSizes[facename][0],
       faceSizes[facename][0]
     );
-    gltf.scene.position.set(-7, -1, 0);
+    gltf.scene.position.set(-2, 0.8, -5);
     gltf.scene.name = "face-left-chin" + facename;
     gltf.scene.visible = false;
     scene.add(gltf.scene);
@@ -146,7 +146,7 @@ folder_name.forEach((facename) => {
       faceSizes[facename][0],
       faceSizes[facename][0]
     );
-    gltf.scene.position.set(-2, 0.8, -5);
+    gltf.scene.position.set(-2, 0, -15);
     gltf.scene.name = "face-left-profile" + facename;
     gltf.scene.visible = false;
     scene.add(gltf.scene);
@@ -171,7 +171,7 @@ folder_name.forEach((facename) => {
       faceSizes[facename][1],
       faceSizes[facename][1]
     );
-    gltf.scene.position.set(7, -1, 0);
+    gltf.scene.position.set(11, 0.8, -5);
     gltf.scene.name = "face-right-chin" + facename;
     gltf.scene.visible = false;
     scene.add(gltf.scene);
@@ -183,7 +183,7 @@ folder_name.forEach((facename) => {
       faceSizes[facename][1],
       faceSizes[facename][1]
     );
-    gltf.scene.position.set(11, 0.8, -5);
+    gltf.scene.position.set(11, 0, -15);
     gltf.scene.name = "face-right-profile" + facename;
     gltf.scene.visible = false;
     scene.add(gltf.scene);
@@ -309,13 +309,13 @@ var dictTimes1 = {
   Scene31: 26,
   Scene4: 34,
   Scene5: 42,
-  Scene6: 10,
-  Scene61: 5,
-  Scene62: 10000000,
-  Scene7: 15,
-  Scene8: 20,
-  Scene9: 25,
-  Scene10: 30,
+  Scene6: 13,
+  Scene61: 5, //5
+  Scene62: 10, //10
+  Scene7: 15, //15,
+  Scene8: 25, //20,
+  Scene9: 40, //35,
+  Scene10: 50, //40,
 };
 
 var dictTimes23 = {
@@ -325,6 +325,14 @@ var dictTimes23 = {
   Scene4: 24,
   Scene5: 30,
 };
+
+// var dictTimes23 = {
+//   Scene1: initdelay,
+//   Scene2: 2,
+//   Scene3: 2,
+//   Scene4: 2,
+//   Scene5: 30000,
+// };
 
 // -----------------------------------------------------------------------------------
 // PROGRESS BAR
@@ -388,6 +396,18 @@ function opacityBackground(id) {
   }
 }
 
+// function changetext (objectID, text) {
+//   let op = 0
+//   while (op < 1){
+//     document.getElementById(objectID).innerHTML = text
+//     document.getElementById(objectID).style.opacity = op
+//     op += 0.001
+//     console.log(op)
+//   }
+
+//   op = 0
+// }
+
 ///
 
 // let wireframe, camera2;
@@ -420,30 +440,57 @@ const pointer = new THREE.Vector2();
 const raycaster = new THREE.Raycaster();
 var target = new THREE.Vector3();
 
-const onMouseMove = (event) => {
-  pointer.x =
-    (event.clientX / document.getElementById("main-canvas").width) * 2 - 1;
-  pointer.y =
-    -(event.clientY / document.getElementById("main-canvas").height) * 2 + 1;
+const onMouseMove = (event, elapsedTime) => {
+  pointer.x = (event.clientX / document.getElementById("main-canvas").width) * 2 - 1;
+  pointer.y = -(event.clientY / document.getElementById("main-canvas").height) * 2 + 1;
   pointer.z = 1;
 
   raycaster.setFromCamera(pointer, camera);
   const intersects = raycaster.intersectObjects(scene.children);
+  
+  if (intersects.length > 0) {
+    console.log(intersects[0].object.parent.name)
+    target.x += pointer.x - target.x;
+    target.y += pointer.y - target.y;
+    target.y -= 1
+    target.z = 3;
+    if (intersects[0].object.parent.name == 'face3-explore'){
+      target.x += 9.5
+      intersects[0].object.lookAt(target)
+    }
+    else if (intersects[0].object.parent.name == 'face1-explore'){
+      target.x -= 9.5
+      intersects[0].object.lookAt(target)
+    }
+    else{
+      intersects[0].object.lookAt(target)
+    }
+    // console.log(intersects[0].object.parent.name)
+    // console.log(scene.getObjectByName(intersects[0].object.parent.name))
+    // target.x += ( pointer.x - target.x ) * 2;
+    // target.y += ( - pointer.y - target.y ) * 2 ;
+    // scene.getObjectByName(intersects[0].object.parent.name).lookAt = target
+  }
 
-  /*if (intersects.length > 0) {
-    target.x += ( pointer.x - target.x ) * 2;
-    target.y += ( - pointer.y - target.y ) * 2 ;
-    target.z = camera.position.z;
-    intersects[0].object.lookAt(target)
-  }*/
-  target.x += pointer.x - target.x;
-  target.y += pointer.y - target.y;
-  target.z = 1;
-  console.log(target);
-  scene.getObjectByName("face1-explore").lookAt(target);
-  scene.getObjectByName("face2-explore").lookAt(target);
-  scene.getObjectByName("face3-explore").lookAt(target);
-};
+
+  // if (intersects.length > 0) {
+  //   target.x += ( pointer.x - target.x ) * 2;
+  //   target.y += ( - pointer.y - target.y ) * 2 ;
+  //   target.z = camera.position.z;
+  //   intersects[0].object.lookAt(target)
+
+    // scene.getObjectByName("face-left-chinface1/").rotation.y = Math.sin(elapsedTime * delay) * rangeMovement;
+  
+  // target.x += pointer.x - target.x;
+  // target.y += pointer.y - target.y;
+  // target.z = 1;
+  // console.log(target);
+  // scene.getObjectByName("face1-explore").lookAt(target);
+  // scene.getObjectByName("face2-explore").lookAt(target);
+  // scene.getObjectByName("face3-explore").lookAt(target);
+
+  // }
+;}
 
 let i = 0;
 let URL = window.location.href.split("/").slice(0, -1).join("/");
@@ -472,6 +519,10 @@ function onClick(event) {
 // -----------------------------------------------------------------------------------
 // TICK FUNCTION
 //
+var bouncingfont1 = 1;
+var bouncingfont2 = 1;
+var bouncingfont3 = 1;
+
 var rectopacity = 0;
 const cameramovementdelay = 4;
 const objectsmovementdelay = 2;
@@ -488,7 +539,7 @@ const tick = () => {
   const delay = 0.6;
   const rangeMovement = 0.2;
 
-  if (tmp[tmp.length - 1] == "") {
+  if (tmp[tmp.length - 1] == "" || tmp[tmp.length - 1] == "index.html") {
     document.getElementById("background-history-id").style.opacity = 1;
     if (elapsedTime > initdelay) {
       opacityBackground("background-history-id");
@@ -538,6 +589,8 @@ const tick = () => {
     // -------------------- Scene 1.1
     if (elapsedTime > dictTimes1["Scene11"]) {
       startTime = dictTimes1["Scene11"];
+      // changetext("text2", "How does your brain recognize faces?")
+      
       document.getElementById("text2").innerHTML =
         "How does your brain recognize faces?";
     }
@@ -550,62 +603,37 @@ const tick = () => {
     // -------------------- Scene 2
     if (elapsedTime > dictTimes1["Scene2"]) {
       startTime = dictTimes1["Scene2"];
-      document.getElementById("text2").innerHTML =
-        "Is it by the arch of the chin?";
-      lerpAnimation(
-        camera,
-        new THREE.Vector3(90, -20, 100),
-        elapsedTime,
-        startTime,
-        startTime + cameramovementdelay
-      );
-      lerpAnimation(
-        scene.getObjectByName("face-leftface1/"),
-        new THREE.Vector3(-2, 0.8, -5),
-        elapsedTime,
-        startTime,
-        startTime + objectsmovementdelay
-      );
-      lerpAnimation(
-        scene.getObjectByName("face-rightface1/"),
-        new THREE.Vector3(11, 0.8, -5),
-        elapsedTime,
-        startTime,
-        startTime + objectsmovementdelay
-      );
+      document.getElementById("text2").style.opacity = 0;
 
-      scene.getObjectByName("face-left-chinface1/").visible = true;
-      lerpAnimation(
-        scene.getObjectByName("face-left-chinface1/"),
-        scene.getObjectByName("face-leftface1/").position,
-        elapsedTime,
-        startTime,
-        startTime + objectsmovementdelay
-      );
-
-      scene.getObjectByName("face-right-chinface1/").visible = true;
-      lerpAnimation(
-        scene.getObjectByName("face-right-chinface1/"),
-        scene.getObjectByName("face-rightface1/").position,
-        elapsedTime,
-        startTime,
-        startTime + objectsmovementdelay
-      );
+      lerpAnimation(camera, new THREE.Vector3(90, -20, 100), elapsedTime, startTime, startTime + cameramovementdelay);
+      lerpAnimation(scene.getObjectByName("face-leftface1/"), new THREE.Vector3(-2, 0.8, -5), elapsedTime, startTime, startTime + objectsmovementdelay);
+      lerpAnimation(scene.getObjectByName("face-rightface1/"), new THREE.Vector3(11, 0.8, -5), elapsedTime, startTime, startTime + objectsmovementdelay);
+      
+      if (elapsedTime > startTime + objectsmovementdelay) {
+        scene.getObjectByName("face-left-chinface1/").visible = true;
+        scene.getObjectByName("face-right-chinface1/").visible = true;
+      }
+      if (elapsedTime > startTime + objectsmovementdelay + 1) {
+        document.getElementById("text2").style.opacity = 1;
+        document.getElementById("text2").innerHTML = "Is it by the arch of the chin?";
+      }
+      
     }
     // -------------------- Scene 3
     if (elapsedTime > dictTimes1["Scene3"]) {
       startTime = dictTimes1["Scene3"];
-      document.getElementById("text2").innerHTML =
-        "Or is it by the shape of the nose?";
-      document.getElementById("text1").style.alignItems = "flex-end";
-      document.getElementById("text2").style.textAlign = "right";
+
+      scene.getObjectByName("face-left-chinface1/").visible = false;
+      scene.getObjectByName("face-right-chinface1/").visible = false;
+      document.getElementById("text2").style.opacity = 0;
+
 
       lerpAnimation(
         camera,
         new THREE.Vector3(-80, 0, 90),
         elapsedTime,
         startTime,
-        startTime + cameramovementdelay
+        startTime + 2
       );
 
       lerpAnimation(
@@ -623,26 +651,18 @@ const tick = () => {
         startTime + objectsmovementdelay
       );
 
-      scene.getObjectByName("face-left-chinface1/").visible = false;
-      scene.getObjectByName("face-right-chinface1/").visible = false;
+        if (elapsedTime > startTime + objectsmovementdelay) {
+          scene.getObjectByName("face-left-profileface1/").visible = true;
+          scene.getObjectByName("face-right-profileface1/").visible = true;
+          }
+        if (elapsedTime > startTime + objectsmovementdelay + 1) {
+          document.getElementById("text2").style.opacity = 1;
+          document.getElementById("text2").innerHTML = "Or is it by the shape of the nose?";
+          document.getElementById("text1").style.alignItems = "flex-end";
+          document.getElementById("text2").style.textAlign = "right";
+        }
 
-      scene.getObjectByName("face-left-profileface1/").visible = true;
-      scene.getObjectByName("face-right-profileface1/").visible = true;
 
-      lerpAnimation(
-        scene.getObjectByName("face-left-profileface1/"),
-        scene.getObjectByName("face-leftface1/").position,
-        elapsedTime,
-        startTime,
-        startTime + objectsmovementdelay
-      );
-      lerpAnimation(
-        scene.getObjectByName("face-right-profileface1/"),
-        scene.getObjectByName("face-rightface1/").position,
-        elapsedTime,
-        startTime,
-        startTime + objectsmovementdelay
-      );
     }
     // -------------------- Scene 3.1
     if (elapsedTime > dictTimes1["Scene31"]) {
@@ -657,7 +677,7 @@ const tick = () => {
 
       scene.getObjectByName("face-left-profileface1/").visible = false;
       scene.getObjectByName("face-right-profileface1/").visible = false;
-
+  
       lerpAnimation(
         scene.getObjectByName("face-leftface1/"),
         new THREE.Vector3(-10, 0.8, -15),
@@ -695,14 +715,13 @@ const tick = () => {
     // -------------------- Scene 4
     if (elapsedTime > dictTimes1["Scene4"]) {
       startTime = dictTimes1["Scene4"];
-      document.getElementById("text1").style.padding =
-        "148px 226px 148px 226px";
-
+      
+      document.getElementById("text1").style.padding ="148px 226px 148px 226px"; // change to make it responsive
       document.getElementById("text2").style.maxWidth = "1467px";
       document.getElementById("text2").style.fontSize = "180px";
-      document.getElementById("text2").innerHTML =
-        "These faces have a match percentage of 98%";
+      document.getElementById("text2").innerHTML = "These faces have a match percentage of 98%";
       document.getElementById("text3").innerHTML = "";
+
     }
 
     if (elapsedTime > dictTimes1["Scene5"]) {
@@ -747,8 +766,8 @@ const tick = () => {
     // -------------------- Scene 2
     if (elapsedTime > dictTimes23["Scene2"]) {
       startTime = dictTimes23["Scene2"];
-      document.getElementById("text2").innerHTML =
-        "The arch of their chin is a 20% match";
+      document.getElementById("text2").style.opacity = 0;
+
       lerpAnimation(
         camera,
         new THREE.Vector3(90, -20, 100),
@@ -771,37 +790,48 @@ const tick = () => {
         startTime + objectsmovementdelay
       );
 
-      scene.getObjectByName("face-left-chinface2/").visible = true;
-      lerpAnimation(
-        scene.getObjectByName("face-left-chinface2/"),
-        scene.getObjectByName("face-leftface2/").position,
-        elapsedTime,
-        startTime,
-        startTime + objectsmovementdelay
-      );
+      // scene.getObjectByName("face-left-chinface2/").visible = true;
+      // lerpAnimation(
+      //   scene.getObjectByName("face-left-chinface2/"),
+      //   scene.getObjectByName("face-leftface2/").position,
+      //   elapsedTime,
+      //   startTime,
+      //   startTime + objectsmovementdelay
+      // );
 
-      scene.getObjectByName("face-right-chinface2/").visible = true;
-      lerpAnimation(
-        scene.getObjectByName("face-right-chinface2/"),
-        scene.getObjectByName("face-rightface2/").position,
-        elapsedTime,
-        startTime,
-        startTime + objectsmovementdelay
-      );
+      // scene.getObjectByName("face-right-chinface2/").visible = true;
+      // lerpAnimation(
+      //   scene.getObjectByName("face-right-chinface2/"),
+      //   scene.getObjectByName("face-rightface2/").position,
+      //   elapsedTime,
+      //   startTime,
+      //   startTime + objectsmovementdelay
+      // );
+
+      if (elapsedTime > startTime + objectsmovementdelay) {
+        scene.getObjectByName("face-left-chinface2/").visible = true;
+        scene.getObjectByName("face-right-chinface2/").visible = true;
+      }
+      if (elapsedTime > startTime + objectsmovementdelay + 1) {
+        document.getElementById("text2").style.opacity = 1;
+        document.getElementById("text2").innerHTML = "The arch of their chin is a 20% match";
+      }
+
     }
     // -------------------- Scene 3
     if (elapsedTime > dictTimes23["Scene3"]) {
       startTime = dictTimes23["Scene3"];
-      document.getElementById("text2").innerHTML = "Their profile match 13%";
-      document.getElementById("text1").style.alignItems = "flex-end";
-      document.getElementById("text2").style.textAlign = "right";
+
+      scene.getObjectByName("face-left-chinface2/").visible = false;
+      scene.getObjectByName("face-right-chinface2/").visible = false;
+      document.getElementById("text2").style.opacity = 0;
 
       lerpAnimation(
         camera,
         new THREE.Vector3(-80, 0, 90),
         elapsedTime,
         startTime,
-        startTime + cameramovementdelay
+        startTime + 2
       );
 
       lerpAnimation(
@@ -819,26 +849,17 @@ const tick = () => {
         startTime + objectsmovementdelay
       );
 
-      scene.getObjectByName("face-left-chinface2/").visible = false;
-      scene.getObjectByName("face-right-chinface2/").visible = false;
+      if (elapsedTime > startTime + objectsmovementdelay) {
+        scene.getObjectByName("face-left-profileface2/").visible = true;
+        scene.getObjectByName("face-right-profileface2/").visible = true;
+        }
+      if (elapsedTime > startTime + objectsmovementdelay + 1) {
+        document.getElementById("text2").style.opacity = 1;
+        document.getElementById("text2").innerHTML = "Their profile match 13%";
+        document.getElementById("text1").style.alignItems = "flex-end";
+        document.getElementById("text2").style.textAlign = "right";
+      }
 
-      scene.getObjectByName("face-left-profileface2/").visible = true;
-      scene.getObjectByName("face-right-profileface2/").visible = true;
-
-      lerpAnimation(
-        scene.getObjectByName("face-left-profileface2/"),
-        scene.getObjectByName("face-leftface2/").position,
-        elapsedTime,
-        startTime,
-        startTime + objectsmovementdelay
-      );
-      lerpAnimation(
-        scene.getObjectByName("face-right-profileface2/"),
-        scene.getObjectByName("face-rightface2/").position,
-        elapsedTime,
-        startTime,
-        startTime + objectsmovementdelay
-      );
     }
     // -------------------- Scene 4
     if (elapsedTime > dictTimes23["Scene4"]) {
@@ -877,15 +898,12 @@ const tick = () => {
         if (!node.isMesh) return;
         node.material.wireframe = true;
       });
-
-      document.getElementById("text1").style.padding =
-        "148px 226px 148px 226px";
+      document.getElementById("text1").style.alignItems = "center";
       document.getElementById("text2").style.maxWidth = "1467px";
       document.getElementById("text2").style.fontSize = "180px";
       document.getElementById("text2").style.textAlign = "center";
       document.getElementById("text2").style.maxWidth = "1258px";
-      document.getElementById("text2").innerHTML =
-        "This would <u>not</u> be identified as a match.";
+      document.getElementById("text2").innerHTML = "This would <u>not</u> be identified as a match.";
       document.getElementById("text3").innerHTML = "";
     }
 
@@ -930,14 +948,14 @@ const tick = () => {
     // -------------------- Scene 2
     if (elapsedTime > dictTimes23["Scene2"]) {
       startTime = dictTimes23["Scene2"];
-      document.getElementById("text2").innerHTML =
-        "The arch of their chin is a 98% match";
+      document.getElementById("text2").style.opacity = 0;
+
       lerpAnimation(
         camera,
         new THREE.Vector3(90, -20, 100),
         elapsedTime,
         startTime,
-        startTime + cameramovementdelay
+        startTime + 2
       );
       lerpAnimation(
         scene.getObjectByName("face-leftface3/"),
@@ -954,30 +972,39 @@ const tick = () => {
         startTime + objectsmovementdelay
       );
 
-      scene.getObjectByName("face-left-chinface3/").visible = true;
-      lerpAnimation(
-        scene.getObjectByName("face-left-chinface3/"),
-        scene.getObjectByName("face-leftface3/").position,
-        elapsedTime,
-        startTime,
-        startTime + objectsmovementdelay
-      );
+      // scene.getObjectByName("face-left-chinface3/").visible = true;
+      // lerpAnimation(
+      //   scene.getObjectByName("face-left-chinface3/"),
+      //   scene.getObjectByName("face-leftface3/").position,
+      //   elapsedTime,
+      //   startTime,
+      //   startTime + objectsmovementdelay
+      // );
 
-      scene.getObjectByName("face-right-chinface3/").visible = true;
-      lerpAnimation(
-        scene.getObjectByName("face-right-chinface3/"),
-        scene.getObjectByName("face-rightface3/").position,
-        elapsedTime,
-        startTime,
-        startTime + objectsmovementdelay
-      );
+      // scene.getObjectByName("face-right-chinface3/").visible = true;
+      // lerpAnimation(
+      //   scene.getObjectByName("face-right-chinface3/"),
+      //   scene.getObjectByName("face-rightface3/").position,
+      //   elapsedTime,
+      //   startTime,
+      //   startTime + objectsmovementdelay
+      // );
+      if (elapsedTime > startTime + objectsmovementdelay) {
+        scene.getObjectByName("face-left-chinface3/").visible = true;
+        scene.getObjectByName("face-right-chinface3/").visible = true;
+      }
+      if (elapsedTime > startTime + objectsmovementdelay + 1) {
+        document.getElementById("text2").style.opacity = 1;
+        document.getElementById("text2").innerHTML = "The arch of their chin is a 98% match";
+      }
     }
     // -------------------- Scene 3
     if (elapsedTime > dictTimes23["Scene3"]) {
       startTime = dictTimes23["Scene3"];
-      document.getElementById("text2").innerHTML = "Their profile match 95%";
-      document.getElementById("text1").style.alignItems = "flex-end";
-      document.getElementById("text2").style.textAlign = "right";
+      document.getElementById("text2").style.opacity = 0;
+      scene.getObjectByName("face-left-chinface3/").visible = false;
+      scene.getObjectByName("face-right-chinface3/").visible = false;
+      
 
       lerpAnimation(
         camera,
@@ -1001,27 +1028,17 @@ const tick = () => {
         startTime,
         startTime + objectsmovementdelay
       );
-
-      scene.getObjectByName("face-left-chinface3/").visible = false;
-      scene.getObjectByName("face-right-chinface3/").visible = false;
-
-      scene.getObjectByName("face-left-profileface3/").visible = true;
-      scene.getObjectByName("face-right-profileface3/").visible = true;
-
-      lerpAnimation(
-        scene.getObjectByName("face-left-profileface3/"),
-        scene.getObjectByName("face-leftface3/").position,
-        elapsedTime,
-        startTime,
-        startTime + objectsmovementdelay
-      );
-      lerpAnimation(
-        scene.getObjectByName("face-right-profileface3/"),
-        scene.getObjectByName("face-rightface3/").position,
-        elapsedTime,
-        startTime,
-        startTime + objectsmovementdelay
-      );
+      
+      if (elapsedTime > startTime + objectsmovementdelay) {
+        scene.getObjectByName("face-left-profileface3/").visible = true;
+        scene.getObjectByName("face-right-profileface3/").visible = true;
+        }
+      if (elapsedTime > startTime + objectsmovementdelay + 1) {
+        document.getElementById("text2").style.opacity = 1;
+        document.getElementById("text2").innerHTML = "Their profile match 95%";
+        document.getElementById("text1").style.alignItems = "flex-end";
+        document.getElementById("text2").style.textAlign = "right";
+      }
     }
     // -------------------- Scene 4
     if (elapsedTime > dictTimes23["Scene4"]) {
@@ -1062,14 +1079,12 @@ const tick = () => {
         node.material.wireframe = true;
       });
 
-      document.getElementById("text1").style.padding =
-        "148px 226px 148px 226px";
+      document.getElementById("text1").style.alignItems = "center";
       document.getElementById("text2").style.maxWidth = "1467px";
       document.getElementById("text2").style.fontSize = "180px";
       document.getElementById("text2").style.textAlign = "center";
       document.getElementById("text2").style.maxWidth = "1258px";
-      document.getElementById("text2").innerHTML =
-        "This would be identified as a match.";
+      document.getElementById("text2").innerHTML = "This would be identified as a match.";
       document.getElementById("text3").innerHTML = "";
     }
 
@@ -1157,15 +1172,37 @@ const tick = () => {
       scene.getObjectByName("face2-explore").visible = true;
       scene.getObjectByName("face3-explore").visible = true;
 
-      scene.remove(scene.getObjectByName("face-left"));
-      scene.remove(scene.getObjectByName("face-right"));
-      scene.remove(scene.getObjectByName("face-left-chin"));
-      scene.remove(scene.getObjectByName("face-right-chin"));
-      scene.remove(scene.getObjectByName("face-left-profile"));
-      scene.remove(scene.getObjectByName("face-right-profile"));
+      // console.log(scene)
+      scene.remove(scene.getObjectByName("face-leftface1/"));
+      scene.remove(scene.getObjectByName("face-rightface1/"));
+      scene.remove(scene.getObjectByName("face-left-chinface1/"));
+      scene.remove(scene.getObjectByName("face-right-chinface1/"));
+      scene.remove(scene.getObjectByName("face-left-profileface1/"));
+      scene.remove(scene.getObjectByName("face-right-profileface1/"));
 
+      scene.remove(scene.getObjectByName("face-leftface2/"));
+      scene.remove(scene.getObjectByName("face-rightface2/"));
+      scene.remove(scene.getObjectByName("face-left-chinface2/"));
+      scene.remove(scene.getObjectByName("face-right-chinface2/"));
+      scene.remove(scene.getObjectByName("face-left-profileface2/"));
+      scene.remove(scene.getObjectByName("face-right-profileface2/"));
+
+      scene.remove(scene.getObjectByName("face-leftface3/"));
+      scene.remove(scene.getObjectByName("face-rightface3/"));
+      scene.remove(scene.getObjectByName("face-left-chinface3/"));
+      scene.remove(scene.getObjectByName("face-right-chinface3/"));
+      scene.remove(scene.getObjectByName("face-left-profileface3/"));
+      scene.remove(scene.getObjectByName("face-right-profileface3/"));
+
+
+      
       window.addEventListener("mousemove", onMouseMove);
       window.addEventListener("click", onClick);
+
+      if (elapsedTime > initdelay + 2){
+        document.getElementById("explorebutton").style.opacity = 1
+
+      }
     }
   }
   ////////////// -----------------------------------------------------------------------------------------------------
@@ -1177,47 +1214,51 @@ const tick = () => {
     if (elapsedTime > initdelay) {
       opacityBackground("background-history-id");
       scene.getObjectByName("face-leftface1/").visible = true;
-      scene.getObjectByName("face-rightface1/").visible = true;
-      scene.getObjectByName("face-leftface1/").rotation.y =
-        Math.sin(elapsedTime * delay) * rangeMovement;
-      scene.getObjectByName("face-rightface1/").rotation.y =
-        Math.sin(elapsedTime * delay) * rangeMovement;
+      scene.getObjectByName("face-rightface2/").visible = true;
+      scene.getObjectByName("face-leftface1/").rotation.y = Math.sin(elapsedTime * delay) * rangeMovement;
+      scene.getObjectByName("face-rightface1/").rotation.y = Math.sin(elapsedTime * delay) * rangeMovement;
+      scene.getObjectByName("face-rightface2/").rotation.y = Math.sin(elapsedTime * delay) * rangeMovement;
+      
       scene.getObjectByName("face-leftface1/").traverse((node) => {
         if (!node.isMesh) return;
         node.material.wireframe = true;
       });
-      scene.getObjectByName("face-rightface1/").traverse((node) => {
+      scene.getObjectByName("face-rightface2/").traverse((node) => {
         if (!node.isMesh) return;
         node.material.wireframe = true;
       });
       camera.position.copy(new THREE.Vector3(0, 4, 100));
-      scene
-        .getObjectByName("face-leftface1/")
-        .position.copy(new THREE.Vector3(-6.5, -5, 0));
-      scene
-        .getObjectByName("face-rightface1/")
-        .position.copy(new THREE.Vector3(6.5, -5, 0));
+      scene.getObjectByName("face-leftface1/").position.copy(new THREE.Vector3(-6.5, -5, 0));
+      scene.getObjectByName("face-rightface1/").position.copy(new THREE.Vector3(6.5, -5, 0));
+      scene.getObjectByName("face-rightface2/").position.copy(new THREE.Vector3(6.5, -5, 0));
 
       // -------------------- Scene 6.1
-      if (elapsedTime > dictTimes1["Scene61"]) {
+      if (elapsedTime > dictTimes1["Scene61"] && elapsedTime < dictTimes1["Scene62"]) {
         document.getElementById("bluerect").style.opacity = rectopacity;
         document.getElementById("yellowrect").style.opacity = rectopacity;
         rectopacity += 0.01;
-        // names appear
       }
       // -------------------- Scene 6.2
-      if (elapsedTime > dictTimes1["Scene62"]) {
-        // Names disapear
-        document.getElementById("text-final").innerHTML =
-          "Or predict that two pictures from the <u>same person</u> belong to two different people.";
-      }
-      if (elapsedTime > dictTimes1["Scene62"] + 2) {
-        document.getElementById("yellowrect").style.fill = "#3C7AF2";
-        // Names appear
+        if (elapsedTime > dictTimes1["Scene62"] && elapsedTime < dictTimes1["Scene7"]) {
+        document.getElementById("text-final").innerHTML = "Or predict that two pictures from the <u>same person</u> belong to two different people.";
+        document.getElementById("yellowrect").style.background = "#3C7AF2";
+        document.getElementById("yellowrect").style.color = "white";
+        document.getElementById("yellowrect").innerHTML = 'Jack'
+        scene.getObjectByName("face-rightface2/").visible = false
+        scene.getObjectByName("face-rightface1/").visible = true
+        // scene.getObjectByName("face-rightface1/").rotation.y = Math.sin(elapsedTime * delay) * rangeMovement;
+        scene.getObjectByName("face-rightface1/").traverse((node) => {
+          if (!node.isMesh) return;
+          node.material.wireframe = true;
+        scene.getObjectByName("face-rightface1/").position.copy(new THREE.Vector3(6.5, -5, 0));
+        });
       }
 
       // -------------------- Scene 7
       if (elapsedTime > dictTimes1["Scene7"]) {
+        startTime = dictTimes1["Scene7"]
+        scene.getObjectByName("face-rightface2/").visible = false
+
         lerpAnimation(
           camera,
           new THREE.Vector3(20, 0, 80),
@@ -1228,30 +1269,85 @@ const tick = () => {
 
         lerpAnimation(
           scene.getObjectByName("face-leftface1/"),
-          new THREE.Vector3(-10, 0.8, -15),
+          new THREE.Vector3(-10, -0.8, -15),
           elapsedTime,
           startTime,
           startTime + objectsmovementdelay
         );
         lerpAnimation(
           scene.getObjectByName("face-rightface1/"),
-          new THREE.Vector3(8, 0.8, -15),
+          new THREE.Vector3(8, -0.8, -15),
           elapsedTime,
           startTime,
           startTime + objectsmovementdelay
         );
-
+        document.getElementById("text-final").style.marginTop = "200px"
         document.getElementById("text-final").innerHTML =
           "Why is this a problem? The biometric data can be linked to your name, school, or criminal history.<br><br>Can you think about any potential negative consequences?";
 
+        if (document.getElementById("bluerect") != null){
+          document.getElementById("bluerect").remove()
+        }
+        if (document.getElementById("yellowrect") != null){
+          document.getElementById("yellowrect").remove()
+        }
+      }
+
         // -------------------- Scene 8
         if (elapsedTime > dictTimes1["Scene8"]) {
-          // TODO
+          scene.getObjectByName("face-leftface1/").visible = false;
+          scene.getObjectByName("face-rightface1/").visible = false;
+    
+          document.getElementById("text-final").innerHTML = 'What happens if your <br> doppelganger is a criminal?'
+          document.getElementById("text-final").style.marginTop = "350px"
+          // document.getElementById("text-final").style.fontSize = `${(Math.sin(elapsedTime * delay) * 25)+ 50}px`
+          if (bouncingfont1 < 80) {
+            document.getElementById("text-final").style.fontSize = `${bouncingfont1}px`
+            bouncingfont1 += 1
+          }
+
+        }
+        if (elapsedTime > dictTimes1["Scene8"] + 4) { // +4
+          document.getElementById("text-final").innerHTML = 'What happens if you don’t consent to your <br> photo being processed and it’s mislabeled <br> in the system forever?'
+          if (bouncingfont2 < 80) {
+            document.getElementById("text-final").style.fontSize = `${bouncingfont2}px`
+            bouncingfont2 += 1
+          }
+        }
+        if (elapsedTime > dictTimes1["Scene8"] + 8) { // +8
+          // document.getElementById("text-final").innerHTML = 'Or if you’re simply not Caucasian or a man? <br> <br> <font size="20"> As researchers like Joy Buolamwini discovered, <br> this technology does not work the <br> same for all and is predominantly <br> negative towards black women</font>'
+          document.getElementById("text-final").innerHTML = 'Or if you’re simply not Caucasian or a man? <br> <br> '
+
+          if (bouncingfont3 < 80) {
+            document.getElementById("text-final").style.fontSize = `${bouncingfont3}px`
+            bouncingfont3 += 1
+          }
+          // const element = document.getElementById('boxes');
+          if (document.getElementById('boxes') != null){
+            document.getElementById('boxes').remove();
+          }
+
+          var div = document.createElement("div");
+          div.setAttribute('id','Joy');
+          div.style.textAlign = "center";
+          div.style.fontFamily = "Inria Sans", 'sans-serif'
+          div.style.color = "white";
+          div.style.fontSize = '30px'
+          div.innerHTML = "As researchers like Joy Buolamwini discovered, this technology does not work <br>the same for all and is predominantly negative towards black women";
+
+          if (document.getElementById("Joy") == null && elapsedTime > dictTimes1["Scene8"] + 10){
+            document.body.appendChild(div);
+          }
         }
 
         // -------------------- Scene 9
-        if (elapsedTime > dictTimes1["Scene9"]) {
-          // TODO
+        if (elapsedTime > dictTimes1["Scene9"] && elapsedTime < dictTimes1["Scene10"]) {
+          if (document.getElementById('Joy') != null){
+            document.getElementById('Joy').remove();
+          }
+          document.getElementById("text-final").innerHTML = 
+          "And even if your face is “correctly” identified, you have still been reduced to numbers to be processed.<br><br> We accept these machines as factually correct when all they’re doing is using mathematical probabilities."
+          document.getElementById("text-final").style.marginTop = "120px"          
         }
 
         // -------------------- Scene 10
@@ -1259,7 +1355,7 @@ const tick = () => {
           window.location.href =
             window.location.href.split("/")[0] + "/explore.html";
         }
-      }
+      
     }
   }
   // Update controls
