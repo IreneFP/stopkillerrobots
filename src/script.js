@@ -190,54 +190,6 @@ folder_name.forEach((facename) => {
   });
 });
 
-// const file = 'face1/'
-
-// // LEFT FACE ----
-// gltfLoader.load("/models/"+file+"1-face.glb", (gltf) => {
-//   gltf.scene.scale.set(7.5, 7.5, 7.5);
-//   gltf.scene.position.set(-7, -1, 0);
-//   gltf.scene.name = "face-left";
-//   gltf.scene.visible = false;
-//   scene.add(gltf.scene);
-// });
-
-// gltfLoader.load("/models/"+file+"1-linechin.glb", (gltf) => {
-//   gltf.scene.scale.set(7.5, 7.5, 7.5);
-//   gltf.scene.name = "face-left-chin";
-//   gltf.scene.visible = false;
-//   scene.add(gltf.scene);
-// });
-
-// gltfLoader.load("/models/"+file+"1-lineprofile.glb", (gltf) => {
-//   gltf.scene.scale.set(7.5, 7.5, 7.5);
-//   gltf.scene.name = "face-left-profile";
-//   gltf.scene.visible = false;
-//   scene.add(gltf.scene);
-// });
-
-// // RIGHT FACE ----
-// gltfLoader.load("/models/"+file+"2-face.glb", (gltf) => {
-//   gltf.scene.scale.set(7, 7, 7);
-//   gltf.scene.position.set(7, -1, 0);
-//   gltf.scene.name = "face-right";
-//   gltf.scene.visible = false;
-//   scene.add(gltf.scene);
-// });
-
-// gltfLoader.load("/models/"+file+"2-linechin.glb", (gltf) => {
-//   gltf.scene.scale.set(7, 7, 7);
-//   gltf.scene.name = "face-right-chin";
-//   gltf.scene.visible = false;
-//   scene.add(gltf.scene);
-// });
-
-// gltfLoader.load("/models/"+file+"2-lineprofile.glb", (gltf) => {
-//   gltf.scene.scale.set(7, 7, 7);
-//   gltf.scene.name = "face-right-profile";
-//   gltf.scene.visible = false;
-//   scene.add(gltf.scene);
-// });
-
 // FOR EXPLORE
 
 gltfLoader.load("/models/face1/1-face.glb", (gltf) => {
@@ -265,35 +217,6 @@ gltfLoader.load("/models/face3/1-face.glb", (gltf) => {
   scene.add(gltf.scene);
 });
 
-// FOR FINAL
-
-// gltfLoader.load("/models/face1/2-face.glb", (gltf) => {
-//   gltf.scene.scale.set(9, 9, 9);
-//   gltf.scene.position.set(-2, -1, 0);
-//   gltf.scene.name = "faces11-nohead";
-//   gltf.scene.visible = false;
-//   // gltf.scene.traverse((node) => {
-//   //   if (!node.isMesh) return;
-//   //   node.material.wireframe = true;
-//   // });
-//   // gltf.scene.children[0].material.color.setHex(0xC3F23C)
-
-//   scene.add(gltf.scene);
-// });
-
-// gltfLoader.load("/models/face1/1-face.glb", (gltf) => {
-//   gltf.scene.scale.set(9, 9, 9);
-//   gltf.scene.position.set(11, -1, 0);
-//   gltf.scene.name = "faces12-nohead";
-//   gltf.scene.visible = false;
-//   // gltf.scene.traverse((node) => {
-//   //   if (!node.isMesh) return;
-//   //   node.material.wireframe = true;
-//   // });
-//   // gltf.scene.children[0].material.color.setHex(0x3C7AF2)
-//   scene.add(gltf.scene);
-// });
-
 // -----------------------------------------------------------------------------------
 // ANIMATION
 //
@@ -313,9 +236,9 @@ var dictTimes1 = {
   Scene61: 5, //5
   Scene62: 10, //10
   Scene7: 15, //15,
-  Scene8: 25, //20,
-  Scene9: 40, //35,
-  Scene10: 50, //40,
+  Scene8: 25, //25,
+  Scene9: 40, //40,
+  Scene10: 50, //50,
 };
 
 var dictTimes23 = {
@@ -396,41 +319,15 @@ function opacityBackground(id) {
   }
 }
 
-// function changetext (objectID, text) {
-//   let op = 0
-//   while (op < 1){
-//     document.getElementById(objectID).innerHTML = text
-//     document.getElementById(objectID).style.opacity = op
-//     op += 0.001
-//     console.log(op)
-//   }
 
-//   op = 0
-// }
+function getwireframe (object){
+  scene.getObjectByName(object).traverse((node) => {
+    if (!node.isMesh) return;
+    node.material.wireframe = true;
+  })
 
-///
+}
 
-// let wireframe, camera2;
-// let wireframe1;
-// let matLine, matLineBasic, matLineDashed;
-// let stats;
-// let gui;
-
-// let geo = new THREE.IcosahedronGeometry( 20, 1 );
-// const geometry2 = new WireframeGeometry2( geo );
-// matLine = new LineMaterial( {
-
-//   color: 0x4080ff,
-//   linewidth: 5, // in pixels
-//   //resolution:  // to be set by renderer, eventually
-//   dashed: false
-
-// } );
-
-// wireframe = new Wireframe( geometry2, matLine );
-// wireframe.computeLineDi2stances();
-// wireframe.scale.set( 1, 1, 1 );
-// scene.add( wireframe );
 
 // -----------------------------------------------------------------------------------
 // RAYCASTER
@@ -789,24 +686,6 @@ const tick = () => {
         startTime,
         startTime + objectsmovementdelay
       );
-
-      // scene.getObjectByName("face-left-chinface2/").visible = true;
-      // lerpAnimation(
-      //   scene.getObjectByName("face-left-chinface2/"),
-      //   scene.getObjectByName("face-leftface2/").position,
-      //   elapsedTime,
-      //   startTime,
-      //   startTime + objectsmovementdelay
-      // );
-
-      // scene.getObjectByName("face-right-chinface2/").visible = true;
-      // lerpAnimation(
-      //   scene.getObjectByName("face-right-chinface2/"),
-      //   scene.getObjectByName("face-rightface2/").position,
-      //   elapsedTime,
-      //   startTime,
-      //   startTime + objectsmovementdelay
-      // );
 
       if (elapsedTime > startTime + objectsmovementdelay) {
         scene.getObjectByName("face-left-chinface2/").visible = true;
@@ -1223,10 +1102,12 @@ const tick = () => {
         if (!node.isMesh) return;
         node.material.wireframe = true;
       });
+
       scene.getObjectByName("face-rightface2/").traverse((node) => {
         if (!node.isMesh) return;
         node.material.wireframe = true;
       });
+
       camera.position.copy(new THREE.Vector3(0, 4, 100));
       scene.getObjectByName("face-leftface1/").position.copy(new THREE.Vector3(-6.5, -5, 0));
       scene.getObjectByName("face-rightface1/").position.copy(new THREE.Vector3(6.5, -5, 0));
@@ -1241,8 +1122,8 @@ const tick = () => {
       // -------------------- Scene 6.2
         if (elapsedTime > dictTimes1["Scene62"] && elapsedTime < dictTimes1["Scene7"]) {
         document.getElementById("text-final").innerHTML = "Or predict that two pictures from the <u>same person</u> belong to two different people.";
-        document.getElementById("yellowrect").style.background = "#3C7AF2";
-        document.getElementById("yellowrect").style.color = "white";
+        document.getElementById("yellowrect").style.background = "#C3F23C";
+        document.getElementById("yellowrect").style.color = "black";
         document.getElementById("yellowrect").innerHTML = 'Jack'
         scene.getObjectByName("face-rightface2/").visible = false
         scene.getObjectByName("face-rightface1/").visible = true
@@ -1307,7 +1188,7 @@ const tick = () => {
           }
 
         }
-        if (elapsedTime > dictTimes1["Scene8"] + 4) { // +4
+        if (elapsedTime > dictTimes1["Scene8"] + 4 ) { // +4
           document.getElementById("text-final").innerHTML = 'What happens if you don’t consent to your <br> photo being processed and it’s mislabeled <br> in the system forever?'
           if (bouncingfont2 < 80) {
             document.getElementById("text-final").style.fontSize = `${bouncingfont2}px`
@@ -1341,19 +1222,62 @@ const tick = () => {
         }
 
         // -------------------- Scene 9
-        if (elapsedTime > dictTimes1["Scene9"] && elapsedTime < dictTimes1["Scene10"]) {
+        if (elapsedTime > dictTimes1["Scene9"]) {
+          startTime = dictTimes1["Scene9"]
           if (document.getElementById('Joy') != null){
             document.getElementById('Joy').remove();
           }
           document.getElementById("text-final").innerHTML = 
           "And even if your face is “correctly” identified, you have still been reduced to numbers to be processed.<br><br> We accept these machines as factually correct when all they’re doing is using mathematical probabilities."
           document.getElementById("text-final").style.marginTop = "120px"          
+          scene.getObjectByName("face-leftface1/").visible = true;
+          scene.getObjectByName("face-rightface1/").visible = true;
+          scene.getObjectByName("face-rightface1/").traverse((node) => {
+            if (!node.isMesh) return;
+            node.material.wireframe = true;
+          });
+
+          lerpAnimation(camera, new THREE.Vector3(20, 0, 200), elapsedTime, startTime, startTime + 5);
+
+          getwireframe("face2-explore")
+          getwireframe("face-leftface2/")
+          scene.getObjectByName("face2-explore").rotation.y = Math.sin(elapsedTime * delay) * rangeMovement;
+          scene.getObjectByName("face-leftface2/").rotation.y = Math.sin(elapsedTime * delay) * rangeMovement;
+          scene.getObjectByName("face-leftface2/").visible = true
+          scene.getObjectByName("face-rightface2/").visible = true
+          scene.getObjectByName("face2-explore").visible = true
+          scene.getObjectByName("face2-explore").scale.set(7.5, 7.5, 7.5)
+          scene.getObjectByName("face-leftface2/").position.copy(new THREE.Vector3(-15, 12.2, -15))
+          scene.getObjectByName("face-rightface2/").position.copy(new THREE.Vector3(1, 12.2, -15))
+          scene.getObjectByName("face2-explore").position.copy(new THREE.Vector3(16, 12.2, -15))
+                    
+          getwireframe("face1-explore")
+          scene.getObjectByName("face1-explore").rotation.y = Math.sin(elapsedTime * delay) * rangeMovement;
+          scene.getObjectByName("face1-explore").visible = true
+          scene.getObjectByName("face1-explore").scale.set(9, 9, 9)
+          scene.getObjectByName("face-leftface1/").position.copy(new THREE.Vector3(8, -0.8, -15))
+          scene.getObjectByName("face-rightface1/").position.copy(new THREE.Vector3(-8, -0.8, -15))
+          scene.getObjectByName("face1-explore").position.copy(new THREE.Vector3(-24, -0.8, -15))
+          
+          getwireframe("face3-explore")
+          getwireframe("face-leftface3/")
+          getwireframe("face-rightface3/")
+          scene.getObjectByName("face3-explore").rotation.y = Math.sin(elapsedTime * delay) * rangeMovement;
+          scene.getObjectByName("face-leftface3/").rotation.y = Math.sin(elapsedTime * delay) * rangeMovement;
+          scene.getObjectByName("face-rightface3/").rotation.y = Math.sin(elapsedTime * delay) * rangeMovement;
+          scene.getObjectByName("face-leftface3/").visible = true
+          scene.getObjectByName("face-rightface3/").visible = true
+          scene.getObjectByName("face3-explore").visible = true
+          scene.getObjectByName("face3-explore").scale.set(9, 9, 9)
+          scene.getObjectByName("face-leftface3/").position.copy(new THREE.Vector3(-15, -13.8, -15))
+          scene.getObjectByName("face-rightface3/").position.copy(new THREE.Vector3(1, -13.8, -15))
+          scene.getObjectByName("face3-explore").position.copy(new THREE.Vector3(16, -13.8, -15))
         }
 
         // -------------------- Scene 10
-        if (elapsedTime > dictTimes1["Scene10"]) {
-          window.location.href =
-            window.location.href.split("/")[0] + "/explore.html";
+        if (elapsedTime >= dictTimes1["Scene10"]) {
+          
+          window.location.href = window.location.href.split("/")[0] + "/explore.html";
         }
       
     }
