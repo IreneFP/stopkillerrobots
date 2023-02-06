@@ -116,7 +116,7 @@ const faceSizes = {
 
 folder_name.forEach((facename) => {
   // LEFT FACE ----
-  gltfLoader.load("/models/" + facename + "1-face.glb", (gltf) => {
+  gltfLoader.load("../models/" + facename + "1-face.glb", (gltf) => {
     gltf.scene.scale.set(
       faceSizes[facename][0],
       faceSizes[facename][0],
@@ -128,7 +128,7 @@ folder_name.forEach((facename) => {
     scene.add(gltf.scene);
   });
 
-  gltfLoader.load("/models/" + facename + "1-linechin.glb", (gltf) => {
+  gltfLoader.load("../models/" + facename + "1-linechin.glb", (gltf) => {
     gltf.scene.scale.set(
       faceSizes[facename][0],
       faceSizes[facename][0],
@@ -140,7 +140,7 @@ folder_name.forEach((facename) => {
     scene.add(gltf.scene);
   });
 
-  gltfLoader.load("/models/" + facename + "1-lineprofile.glb", (gltf) => {
+  gltfLoader.load("../models/" + facename + "1-lineprofile.glb", (gltf) => {
     gltf.scene.scale.set(
       faceSizes[facename][0],
       faceSizes[facename][0],
@@ -153,7 +153,7 @@ folder_name.forEach((facename) => {
   });
 
   // RIGHT FACE ----
-  gltfLoader.load("/models/" + facename + "2-face.glb", (gltf) => {
+  gltfLoader.load("../models/" + facename + "2-face.glb", (gltf) => {
     gltf.scene.scale.set(
       faceSizes[facename][1],
       faceSizes[facename][1],
@@ -165,7 +165,7 @@ folder_name.forEach((facename) => {
     scene.add(gltf.scene);
   });
 
-  gltfLoader.load("/models/" + facename + "2-linechin.glb", (gltf) => {
+  gltfLoader.load("../models/" + facename + "2-linechin.glb", (gltf) => {
     gltf.scene.scale.set(
       faceSizes[facename][1],
       faceSizes[facename][1],
@@ -177,7 +177,7 @@ folder_name.forEach((facename) => {
     scene.add(gltf.scene);
   });
 
-  gltfLoader.load("/models/" + facename + "2-lineprofile.glb", (gltf) => {
+  gltfLoader.load("../models/" + facename + "2-lineprofile.glb", (gltf) => {
     gltf.scene.scale.set(
       faceSizes[facename][1],
       faceSizes[facename][1],
@@ -192,7 +192,7 @@ folder_name.forEach((facename) => {
 
 // FOR EXPLORE
 
-gltfLoader.load("/models/face1/1-face.glb", (gltf) => {
+gltfLoader.load("../models/face1/1-face.glb", (gltf) => {
   gltf.scene.scale.set(5, 5, 5);
   gltf.scene.position.set(-10, -1, 0);
   gltf.scene.name = "face1-explore";
@@ -200,7 +200,7 @@ gltfLoader.load("/models/face1/1-face.glb", (gltf) => {
   scene.add(gltf.scene);
 });
 
-gltfLoader.load("/models//face2/1-face.glb", (gltf) => {
+gltfLoader.load("../models//face2/1-face.glb", (gltf) => {
   gltf.scene.scale.set(4.5, 4.5, 4.5);
   gltf.scene.position.set(0, -1, 0);
   gltf.scene.name = "face2-explore";
@@ -208,7 +208,7 @@ gltfLoader.load("/models//face2/1-face.glb", (gltf) => {
   scene.add(gltf.scene);
 });
 
-gltfLoader.load("/models/face3/1-face.glb", (gltf) => {
+gltfLoader.load("../models/face3/1-face.glb", (gltf) => {
   gltf.scene.scale.set(5, 5, 5);
   gltf.scene.position.set(10, -1, 0);
   gltf.scene.name = "face3-explore";
