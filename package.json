@@ -4,7 +4,7 @@
   "homepage": "http://IreneFP.github.io/stopkillerrobots",
   "scripts": {
     "predeploy": "webpack --config ./bundler/webpack.prod.js",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "build": "webpack --config ./bundler/webpack.prod.js",
     "dev": "webpack serve --config ./bundler/webpack.dev.js"
   },
