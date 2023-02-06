@@ -1,7 +1,10 @@
 {
   "repository": "#",
   "license": "UNLICENSED",
+  "homepage": "http://IreneFP.github.io/stopkillerrobots",
   "scripts": {
+    "predeploy": "webpack --config ./bundler/webpack.prod.js",
+    "deploy": "gh-pages -d build",
     "build": "webpack --config ./bundler/webpack.prod.js",
     "dev": "webpack serve --config ./bundler/webpack.dev.js"
   },
@@ -28,5 +31,8 @@
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.8.1",
     "webpack-merge": "^5.8.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
   }
 }
