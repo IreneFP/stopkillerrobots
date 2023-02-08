@@ -35,6 +35,9 @@ manager.onStart = function (url, itemsLoaded, itemsTotal) {
 
 manager.onLoad = function () {
   console.log("Loading complete!");
+  tick();
+  // This is where the loading of all your files is completed!
+  // You should call your function to start interacting with the scene from here :)
 };
 
 manager.onProgress = function (url, itemsLoaded, itemsTotal) {
@@ -253,7 +256,7 @@ gltfLoader.load("../models/face3/1-face.glb", (gltf) => {
 // ANIMATION
 //
 
-const initdelay = 2; //seconds // will depend on Lateny
+const initdelay = 0; //seconds // will depend on Lateny
 
 var dictTimes1 = {
   Scene1: initdelay,
@@ -456,6 +459,7 @@ let startTime = 0;
 const clock = new THREE.Clock();
 
 const tick = () => {
+  console.log("The first tick will appear only after the all objects are loaded :) ");
   // Clock
   const elapsedTime = clock.getElapsedTime();
 
@@ -1395,5 +1399,3 @@ const tick = () => {
   // Call tick again on the next frame
   window.requestAnimationFrame(tick);
 };
-
-tick();
