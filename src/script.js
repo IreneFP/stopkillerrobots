@@ -279,9 +279,9 @@ var dictTimes1 = {
 var dictTimes23 = {
   Scene1: initdelay,
   Scene2: 8,
-  Scene3: 16,
-  Scene4: 24,
-  Scene5: 30,
+  Scene3: 18,
+  Scene4: 28,
+  Scene5: 38,
 };
 
 // var dictTimes23 = {
@@ -699,6 +699,7 @@ const tick = () => {
         Math.sin(elapsedTime * delay) * rangeMovement;
     }
     // -------------------- Scene 1
+
     if (elapsedTime > dictTimes23["Scene1"]) {
       startTime = dictTimes23["Scene1"];
       scene
