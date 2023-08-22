@@ -260,13 +260,13 @@ const initdelay = 0; //seconds // will depend on Lateny
 
 var dictTimes1 = {
   Scene1: initdelay,
-  Scene11: 4,
-  Scene12: 8,
-  Scene2: 12,
-  Scene3: 18,
-  Scene31: 26,
-  Scene4: 34,
-  Scene5: 42,
+  Scene11: 8,
+  Scene12: 16,
+  Scene2: 24,
+  Scene3: 30,
+  Scene31: 36,
+  Scene4: 51,
+  Scene5: 60,
   Scene6: 13,
   Scene61: 5, //5
   Scene62: 10, //10
@@ -366,7 +366,6 @@ function getwireframe(object) {
 //
 
 const pointer = new THREE.Vector2();
-const raycaster = new THREE.Raycaster();
 var target = new THREE.Vector3();
 
 const onMouseMove = (event, elapsedTime) => {
@@ -459,7 +458,7 @@ let startTime = 0;
 const clock = new THREE.Clock();
 
 const tick = () => {
-  console.log("The first tick will appear only after the all objects are loaded :) ");
+//  console.log("The first tick will appear only after the all objects are loaded :) ");
   // Clock
   const elapsedTime = clock.getElapsedTime();
 
@@ -506,6 +505,7 @@ const tick = () => {
         Math.sin(elapsedTime * delay) * rangeMovement;
     }
     // -------------------- Scene 1
+    console.log('time', elapsedTime);
     if (elapsedTime > dictTimes1["Scene1"]) {
       startTime = dictTimes1["Scene1"];
       scene
