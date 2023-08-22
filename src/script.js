@@ -299,6 +299,8 @@ const url = window.location.href.split("/");
 let max_duration = 0;
 if (url[url.length - 1] == "history1.html") {
   max_duration = dictTimes1["Scene5"];
+} else if (url[url.length - 1] == "final.html") {
+  max_duration = dictTimes1["Scene10"];
 } else {
   max_duration = dictTimes23["Scene5"];
 }
@@ -306,8 +308,10 @@ if (url[url.length - 1] == "history1.html") {
 if (
   url[url.length - 1] == "history1.html" ||
   url[url.length - 1] == "history2.html" ||
-  url[url.length - 1] == "history3.html"
+  url[url.length - 1] == "history3.html" ||
+  url[url.length - 1] == "final.html"  
 ) {
+ 
   var bar = new ProgressBar.Line(container, {
     strokeWidth: 0.5,
     easing: "easeInOut",
@@ -317,7 +321,6 @@ if (
     trailWidth: 1,
     svgStyle: { width: "100%", height: "100%" },
   });
-
   bar.animate(1.0); // Number from 0.0 to 1.0
 }
 
