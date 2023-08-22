@@ -270,10 +270,10 @@ var dictTimes1 = {
   Scene6: 13,
   Scene61: 5, //5
   Scene62: 10, //10
-  Scene7: 15, //15,
-  Scene8: 25, //25,
-  Scene9: 40, //40,
-  Scene10: 50, //50,
+  Scene7: 25, //15,
+  Scene8: 40, //25,
+  Scene9: 73, //40,
+  Scene10: 83, //50,
 };
 
 var dictTimes23 = {
@@ -365,6 +365,7 @@ function getwireframe(object) {
 // RAYCASTER
 //
 
+const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
 var target = new THREE.Vector3();
 
@@ -505,7 +506,6 @@ const tick = () => {
         Math.sin(elapsedTime * delay) * rangeMovement;
     }
     // -------------------- Scene 1
-    console.log('time', elapsedTime);
     if (elapsedTime > dictTimes1["Scene1"]) {
       startTime = dictTimes1["Scene1"];
       scene
@@ -1097,7 +1097,7 @@ const tick = () => {
     document.getElementById("background-history-id").style.opacity = 1;
     if (elapsedTime > initdelay) {
       opacityBackground("background-history-id");
-      scene.getObjectByName("face1-explore").visible = true;
+      scene.getObjectByName("face1-explore").visible = false;
       scene.getObjectByName("face2-explore").visible = true;
       scene.getObjectByName("face3-explore").visible = true;
 
@@ -1135,7 +1135,7 @@ const tick = () => {
   // SCRIPT FOR FINAL
   if (tmp[tmp.length - 1] == "final.html") {
     document.getElementById("background-history-id").style.opacity = 1;
-
+    
     // -------------------- Scene 6
     if (elapsedTime > initdelay) {
       opacityBackground("background-history-id");
@@ -1149,13 +1149,17 @@ const tick = () => {
         Math.sin(elapsedTime * delay) * rangeMovement;
 
       scene.getObjectByName("face-leftface1/").traverse((node) => {
+  
         if (!node.isMesh) return;
         node.material.wireframe = true;
+        node.material.color.setHex(0x3C7AF2);
+       
       });
 
       scene.getObjectByName("face-rightface2/").traverse((node) => {
         if (!node.isMesh) return;
         node.material.wireframe = true;
+        node.material.color.setHex(0x3C7AF2);
       });
 
       camera.position.copy(new THREE.Vector3(0, 4, 100));
@@ -1170,14 +1174,14 @@ const tick = () => {
         .position.copy(new THREE.Vector3(6.5, -5, 0));
 
       // -------------------- Scene 6.1
-      if (
-        elapsedTime > dictTimes1["Scene61"] &&
-        elapsedTime < dictTimes1["Scene62"]
-      ) {
-        document.getElementById("bluerect").style.opacity = rectopacity;
-        document.getElementById("yellowrect").style.opacity = rectopacity;
-        rectopacity += 0.01;
-      }
+      // if (
+      //   elapsedTime > dictTimes1["Scene61"] &&
+      //   elapsedTime < dictTimes1["Scene62"]
+      // ) {
+      //   document.getElementById("bluerect").style.opacity = rectopacity;
+      //   document.getElementById("yellowrect").style.opacity = rectopacity;
+      //   rectopacity += 0.01;
+      // }
       // -------------------- Scene 6.2
       if (
         elapsedTime > dictTimes1["Scene62"] &&
@@ -1185,15 +1189,16 @@ const tick = () => {
       ) {
         document.getElementById("text-final").innerHTML =
           "Or predict that two pictures from the <u>same person</u> belong to two different people.";
-        document.getElementById("yellowrect").style.background = "#C3F23C";
-        document.getElementById("yellowrect").style.color = "black";
-        document.getElementById("yellowrect").innerHTML = "Jack";
+        // document.getElementById("yellowrect").style.background = "#C3F23C";
+        // document.getElementById("yellowrect").style.color = "black";
+        // document.getElementById("yellowrect").innerHTML = "Jack";
         scene.getObjectByName("face-rightface2/").visible = false;
         scene.getObjectByName("face-rightface1/").visible = true;
         // scene.getObjectByName("face-rightface1/").rotation.y = Math.sin(elapsedTime * delay) * rangeMovement;
         scene.getObjectByName("face-rightface1/").traverse((node) => {
           if (!node.isMesh) return;
           node.material.wireframe = true;
+          node.material.color.setHex(0xC3F23C);
           scene
             .getObjectByName("face-rightface1/")
             .position.copy(new THREE.Vector3(6.5, -5, 0));
@@ -1245,7 +1250,7 @@ const tick = () => {
         scene.getObjectByName("face-rightface1/").visible = false;
 
         document.getElementById("text-final").innerHTML =
-          "What happens if your <br> doppelganger is a criminal?";
+          "What if your<br>doppelg&#228nger is on a no-fly list?";
         document.getElementById("text-final").style.marginTop = "350px";
         // document.getElementById("text-final").style.fontSize = `${(Math.sin(elapsedTime * delay) * 25)+ 50}px`
         if (bouncingfont1 < 80) {
@@ -1255,8 +1260,7 @@ const tick = () => {
           bouncingfont1 += 1;
         }
       }
-      if (elapsedTime > dictTimes1["Scene8"] + 4) {
-        // +4
+      if (elapsedTime > dictTimes1["Scene8"] + 10) {
         document.getElementById("text-final").innerHTML =
           "What happens if you don’t consent to your <br> photo being processed and it’s mislabeled <br> in the system forever?";
         if (bouncingfont2 < 80) {
@@ -1266,8 +1270,7 @@ const tick = () => {
           bouncingfont2 += 1;
         }
       }
-      if (elapsedTime > dictTimes1["Scene8"] + 8) {
-        // +8
+      if (elapsedTime > dictTimes1["Scene8"] + 20)  {
         // document.getElementById("text-final").innerHTML = 'Or if you’re simply not Caucasian or a man? <br> <br> <font size="20"> As researchers like Joy Buolamwini discovered, <br> this technology does not work the <br> same for all and is predominantly <br> negative towards black women</font>'
         document.getElementById("text-final").innerHTML =
           "Or if you’re simply not Caucasian or a man? <br> <br> ";
@@ -1294,7 +1297,7 @@ const tick = () => {
 
         if (
           document.getElementById("Joy") == null &&
-          elapsedTime > dictTimes1["Scene8"] + 10
+          elapsedTime > dictTimes1["Scene8"] + 23
         ) {
           document.body.appendChild(div);
         }
