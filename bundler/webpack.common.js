@@ -4,7 +4,10 @@ const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 
 module.exports = {
-    entry: path.resolve(__dirname, '../src/script.js'),
+    entry: {
+        main: path.resolve(__dirname, '../src/script.js'),
+        progress: path.resolve(__dirname,'../src/scripts/progressbar.min.js')
+    },
     output:
     {
         hashFunction: 'xxhash64',
@@ -153,5 +156,8 @@ module.exports = {
                 }
             }
         ]
-    }
+    },
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
+    },
 }
