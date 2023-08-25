@@ -237,7 +237,7 @@ gltfLoader.load("../models/face1/1-face.glb", (gltf) => {
 
 gltfLoader.load("../models//face2/1-face.glb", (gltf) => {
   gltf.scene.scale.set(4.5, 4.5, 4.5);
-  gltf.scene.position.set(0, -1, 0);
+  gltf.scene.position.set(-6, -1, 0);
   gltf.scene.name = "face2-explore";
   gltf.scene.visible = false;
   scene.add(gltf.scene);
@@ -245,7 +245,7 @@ gltfLoader.load("../models//face2/1-face.glb", (gltf) => {
 
 gltfLoader.load("../models/face3/1-face.glb", (gltf) => {
   gltf.scene.scale.set(5, 5, 5);
-  gltf.scene.position.set(10, -1, 0);
+  gltf.scene.position.set(6, -1, 0);
   gltf.scene.name = "face3-explore";
   gltf.scene.visible = false;
 
@@ -297,11 +297,16 @@ var dictTimes23 = {
 //
 const url = window.location.href.split("/");
 let max_duration = 0;
-if (url[url.length - 1] == "history1.html") {
-  max_duration = dictTimes1["Scene5"];
-} else if (url[url.length - 1] == "final.html") {
-  max_duration = dictTimes1["Scene10"];
-} else {
+if (
+  url[url.length - 1] == "history1.html" ||
+  url[url.length - 1] == "history2.html" ||
+  url[url.length - 1] == "history3.html") {
+    max_duration = dictTimes1["Scene5"];
+} else if (
+  url[url.length - 1] == "final.html") {
+    max_duration = dictTimes1["Scene10"];
+}
+else  {
   max_duration = dictTimes23["Scene5"];
 }
 
@@ -1030,6 +1035,8 @@ const tick = () => {
   ////////////// -----------------------------------------------------------------------------------------------------
   // SCRIPT FOR COMPARE 1 [scene 5]
   if (tmp[tmp.length - 1] == "compare-face1.html") {
+    console.log('im in compare');
+
     document.getElementById("background-compare-id").style.opacity = 1;
     if (elapsedTime > initdelay) {
       opacityBackground("background-compare-id");
@@ -1049,6 +1056,7 @@ const tick = () => {
       window.location.href = window.location.href.split("/")[0] + "/final.html";
     }
   }
+
   // SCRIPT FOR COMPARE 2 [scene 5]
   if (tmp[tmp.length - 1] == "compare-face2.html") {
     document.getElementById("background-compare-id").style.opacity = 1;
@@ -1096,7 +1104,7 @@ const tick = () => {
   }
 
   ////////////// -----------------------------------------------------------------------------------------------------
-  // SCRIPT FOR EXPLORE (ALL) [scene 6]
+  // SCRIPT FOR EXPLORE (ALL) [scene 6] 
   if (tmp[tmp.length - 1] == "explore.html") {
     document.getElementById("background-history-id").style.opacity = 1;
     if (elapsedTime > initdelay) {
@@ -1105,6 +1113,7 @@ const tick = () => {
       scene.getObjectByName("face2-explore").visible = true;
       scene.getObjectByName("face3-explore").visible = true;
 
+ 
       // console.log(scene)
       scene.remove(scene.getObjectByName("face-leftface1/"));
       scene.remove(scene.getObjectByName("face-rightface1/"));
