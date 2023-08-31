@@ -4,9 +4,6 @@ const path = require('path')
 
 module.exports = merge(common, {
     mode: 'development',
-    performance: {
-        hints: false
-      },
     devtool: 'eval-source-map',
     devServer: {
         static: {
