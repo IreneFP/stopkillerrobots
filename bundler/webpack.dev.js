@@ -4,12 +4,16 @@ const path = require('path')
 
 module.exports = merge(common, {
     mode: 'development',
-    devtool: 'eval-source-map',
+    stats: 'errors-warnings',
+    infrastructureLogging:
+    {
+        level: 'warn',
+    },
     devServer: {
         static: {
             directory: path.join(__dirname, '../static'),
         },
-        hot: true,
+        hot: false,
         open: true
     },
 })
