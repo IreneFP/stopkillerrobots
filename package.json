@@ -6,8 +6,7 @@
     "predeploy": "webpack --config ./bundler/webpack.prod.js",
     "deploy": "gh-pages -d dist",
     "build": "webpack --config ./bundler/webpack.prod.js",
-    "dev": "webpack serve --config ./bundler/webpack.dev.js",
-    "devoffline": "npx webpack serve --config ./bundler/webpack.dev.js"
+    "dev": "npx webpack serve --config ./bundler/webpack.dev.js"
   },
   "dependencies": {
     "@babel/core": "^7.17.10",

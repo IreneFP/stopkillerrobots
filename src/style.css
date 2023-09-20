@@ -101,17 +101,22 @@ li {
   /* padding-left: 70%; */
 }
 
-#btn-holder {
+
+.btn-nav-holder {
   position: absolute;
   right: 5%;
   z-index: 99999;
 }
 
-body #btn-holder {
+body #btn-next {
+  bottom: 5%;
+}
+
+body #btn-close {
   top: 5%;
 }
 
-.btn-close{
+.btn-nav{
   color: #18181a;
   display: inline-block;
   font-size: 15px;
@@ -121,6 +126,7 @@ body #btn-holder {
   cursor: pointer;
   background: white;
 }
+
 
 .button-cover {
   opacity: 0;
@@ -426,7 +432,7 @@ body {
     transition: all 0.5s ease-out;    
 } */
 canvas {
-  transition: all 0.5s ease-out;
+ transition: all 0.5s ease-out;
   opacity: 1;
 }
 .opacity-zero {

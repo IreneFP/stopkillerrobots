@@ -1035,11 +1035,14 @@ const tick = () => {
   ////////////// -----------------------------------------------------------------------------------------------------
   // SCRIPT FOR COMPARE 1 [scene 5]
   if (tmp[tmp.length - 1] == "compare-face1.html") {
-    console.log('im in compare');
-
+  
     document.getElementById("background-compare-id").style.opacity = 1;
     if (elapsedTime > initdelay) {
-      opacityBackground("background-compare-id");
+      
+      //uncomment to add in fade for faces
+      //opacityBackground("background-compare-id");
+      document.getElementById("background-compare-id").style.opacity = 0;
+
       scene.getObjectByName("face-rightface1/").visible = true;
       scene.getObjectByName("face-leftface1/").visible = true;
       scene.getObjectByName("face-rightface1/").rotation.y =
@@ -1061,7 +1064,8 @@ const tick = () => {
   if (tmp[tmp.length - 1] == "compare-face2.html") {
     document.getElementById("background-compare-id").style.opacity = 1;
     if (elapsedTime > initdelay) {
-      opacityBackground("background-compare-id");
+      //opacityBackground("background-compare-id");
+      document.getElementById("background-compare-id").style.opacity = 0;
       scene.getObjectByName("face-rightface2/").visible = true;
       scene.getObjectByName("face-leftface2/").visible = true;
       scene.getObjectByName("face-rightface2/").rotation.y =
@@ -1084,7 +1088,8 @@ const tick = () => {
   if (tmp[tmp.length - 1] == "compare-face3.html") {
     document.getElementById("background-compare-id").style.opacity = 1;
     if (elapsedTime > initdelay) {
-      opacityBackground("background-compare-id");
+      //opacityBackground("background-compare-id");
+      document.getElementById("background-compare-id").style.opacity = 0;
       scene.getObjectByName("face-rightface3/").visible = true;
       scene.getObjectByName("face-leftface3/").visible = true;
       scene.getObjectByName("face-rightface3/").rotation.y =
