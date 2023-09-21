@@ -238,7 +238,7 @@ body #btn-close {
 .main-data-container {
   display: flex;
   justify-content: space-evenly;
-  padding-top: 32%;
+  padding-top: 35%;
 }
 .single-table {
   border-left: 10px solid white;

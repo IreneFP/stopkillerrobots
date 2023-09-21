@@ -972,6 +972,7 @@ const tick = () => {
       }
       if (elapsedTime > startTime + objectsmovementdelay + 1) {
         document.getElementById("text2").style.opacity = 1;
+        document.getElementById("text2").style.paddingTop = '5%';
         document.getElementById("text2").innerHTML = "Their profile match 95%";
         document.getElementById("text1").style.alignItems = "flex-end";
         document.getElementById("text2").style.textAlign = "right";
