@@ -2,6 +2,7 @@ import "./style.css";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import ProgressBar from 'progressbar.js';
 import { lerp } from "three/src/math/MathUtils";
 // import { WireframeGeometry2 } from 'three/examples/jsm/WireframeGeometry2.js'; /// I HAVE IMPORTED THIS BUT I HAVE NOT INSTALLED IT!
 
@@ -314,9 +315,9 @@ if (
   url[url.length - 1] == "history1.html" ||
   url[url.length - 1] == "history2.html" ||
   url[url.length - 1] == "history3.html" ||
-  url[url.length - 1] == "final.html"  
+  url[url.length - 1] == "final.html"
 ) {
- 
+
   var bar = new ProgressBar.Line(container, {
     strokeWidth: 0.5,
     easing: "easeInOut",
@@ -1036,10 +1037,10 @@ const tick = () => {
   ////////////// -----------------------------------------------------------------------------------------------------
   // SCRIPT FOR COMPARE 1 [scene 5]
   if (tmp[tmp.length - 1] == "compare-face1.html") {
-  
+
     document.getElementById("background-compare-id").style.opacity = 1;
     if (elapsedTime > initdelay) {
-      
+
       //uncomment to add in fade for faces
       //opacityBackground("background-compare-id");
       document.getElementById("background-compare-id").style.opacity = 0;
@@ -1110,7 +1111,7 @@ const tick = () => {
   }
 
   ////////////// -----------------------------------------------------------------------------------------------------
-  // SCRIPT FOR EXPLORE (ALL) [scene 6] 
+  // SCRIPT FOR EXPLORE (ALL) [scene 6]
   if (tmp[tmp.length - 1] == "explore.html") {
     document.getElementById("background-history-id").style.opacity = 1;
     if (elapsedTime > initdelay) {
@@ -1119,7 +1120,7 @@ const tick = () => {
       scene.getObjectByName("face2-explore").visible = true;
       scene.getObjectByName("face3-explore").visible = true;
 
- 
+
       // console.log(scene)
       scene.remove(scene.getObjectByName("face-leftface1/"));
       scene.remove(scene.getObjectByName("face-rightface1/"));
@@ -1154,7 +1155,7 @@ const tick = () => {
   // SCRIPT FOR FINAL
   if (tmp[tmp.length - 1] == "final.html") {
     document.getElementById("background-history-id").style.opacity = 1;
-    
+
     // -------------------- Scene 6
     if (elapsedTime > initdelay) {
       opacityBackground("background-history-id");
@@ -1168,11 +1169,11 @@ const tick = () => {
         Math.sin(elapsedTime * delay) * rangeMovement;
 
       scene.getObjectByName("face-leftface1/").traverse((node) => {
-  
+
         if (!node.isMesh) return;
         node.material.wireframe = true;
         node.material.color.setHex(0x3C7AF2);
-       
+
       });
 
       scene.getObjectByName("face-rightface2/").traverse((node) => {

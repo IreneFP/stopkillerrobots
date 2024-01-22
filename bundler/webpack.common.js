@@ -5,8 +5,7 @@ const path = require('path')
 
 module.exports = {
     entry: {
-        main: path.resolve(__dirname, '../src/script.js'),
-        progress: path.resolve(__dirname,'../src/scripts/progressbar.min.js')
+        main: { import: path.resolve(__dirname, '../src/script.js') },
     },
     output:
     {
@@ -23,8 +22,7 @@ module.exports = {
             ]
         }),
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, '../src/index.html'),
-            minify: true
+            template: path.resolve(__dirname, '../src/index.html')
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, '../src/history1.html'),
@@ -101,7 +99,7 @@ module.exports = {
         // }),
 
         new MiniCSSExtractPlugin()
-        
+
     ],
     module:
     {
