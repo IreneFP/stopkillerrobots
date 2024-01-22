@@ -660,9 +660,7 @@ const tick = () => {
       document.getElementById("text2").style.textAlign = "center";
       document.getElementById("text2").style.maxWidth = "1258px";
       document.getElementById("text2").innerHTML =
-        "Facial recognition technology takes your face and transforms it into data points.";
-      document.getElementById("text3").innerHTML =
-        "The algorithm compares the data points and determines if there is a match";
+        "Facial recognition technology takes your face and transforms it into data points. The algorithm compares the data points and determines if there is a match";
     }
     // -------------------- Scene 4
     if (elapsedTime > dictTimes1["Scene4"]) {
@@ -1274,6 +1272,7 @@ const tick = () => {
         }
       }
       if (elapsedTime > dictTimes1["Scene8"] + 10) {
+        document.getElementById("text-final").style.fontSize = "6vh";
         document.getElementById("text-final").innerHTML =
           "What happens if you don’t consent to your <br> photo being processed and it’s mislabeled <br> in the system forever?";
         if (bouncingfont2 < 80) {
@@ -1322,7 +1321,7 @@ const tick = () => {
         if (document.getElementById("Joy") != null) {
           document.getElementById("Joy").remove();
         }
-        document.getElementById("text-final").style.fontSize = "7vh";
+        document.getElementById("text-final").style.fontSize = "6vh";
         document.getElementById("text-final").innerHTML =
           "And even if your face is “correctly” identified, you have still been reduced to numbers to be processed.<br><br> We accept these machines as factually correct when all they’re doing is using mathematical probabilities.";
         document.getElementById("text-final").style.marginTop = "10vh";
