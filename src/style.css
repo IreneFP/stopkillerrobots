@@ -5,7 +5,7 @@
 
 .split {
   height: 100%;
-  width:33%;
+  width: 33%;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -26,9 +26,9 @@
   left: 33.5%;
 }
 
-.text-explore{
+.text-explore {
   color: rgba(255, 255, 255, 1);
-  font-size: 70px;
+  font-size: 5vh;
   letter-spacing: 0%;
   margin: 20px;
   margin-top: 80px;
@@ -67,8 +67,7 @@ button:active {
   background-color: var(--c);
   color: #fff;
 } 
-*/ 
-
+*/
 
 /* 
 body {
@@ -101,7 +100,6 @@ li {
   /* padding-left: 70%; */
 }
 
-
 .btn-nav-holder {
   position: absolute;
   right: 5%;
@@ -116,7 +114,7 @@ body #btn-close {
   top: 5%;
 }
 
-.btn-nav{
+.btn-nav {
   color: #18181a;
   display: inline-block;
   font-size: 15px;
@@ -126,7 +124,6 @@ body #btn-close {
   cursor: pointer;
   background: white;
 }
-
 
 .button-cover {
   opacity: 0;
@@ -146,10 +143,9 @@ body #btn-close {
   touch-action: manipulation;
 }
 
-.text-button{
+.text-button {
   font-family: "Inria Sans", sans-serif;
   font-size: 20px;
-
 }
 
 .button-cover span:first-child {
@@ -204,27 +200,26 @@ body #btn-close {
   font-size: 15px;
 }
 
-
-.bluerect{
-  opacity:0%;
-  background-color: #3C7AF2;
+.bluerect {
+  opacity: 0%;
+  background-color: #3c7af2;
   text-align: center;
   font-family: "Inria Sans", sans-serif;
   font-size: 50px;
   color: white;
   vertical-align: middle;
-  line-height: 100px;    
+  line-height: 100px;
 }
 
-.yellowrect{
-  opacity:0%;
-  background-color: #3C7AF2;
+.yellowrect {
+  opacity: 0%;
+  background-color: #3c7af2;
   text-align: center;
   font-family: "Inria Sans", sans-serif;
   font-size: 50px;
   color: white;
   vertical-align: middle;
-  line-height: 100px;   
+  line-height: 100px;
 }
 
 .circleyellow {
@@ -253,23 +248,23 @@ td:nth-child(1) {
   color: white;
 }
 
-#bluecolor{
-    color:#3C7AF2 
+#bluecolor {
+  color: #3c7af2;
 }
 
-#yellowcolor{
-    color:#C3F23C 
+#yellowcolor {
+  color: #c3f23c;
 }
 
 #container {
-    z-index: 3;
-    position: absolute;
-    bottom: 0px;
-    margin: 20px;
-    width: 800px;
-    height: 6px;
-    left: 50%;
-    margin-left: -400px;
+  z-index: 3;
+  position: absolute;
+  bottom: 0px;
+  margin: 20px;
+  width: 800px;
+  height: 6px;
+  left: 50%;
+  margin-left: -400px;
 }
 
 table {
@@ -296,7 +291,7 @@ body {
   display: inline-block;
   position: relative;
   color: rgba(255, 255, 255, 1);
-  font-size: 10rem;
+  font-size: 5vh;
   font-weight: 800;
   cursor: pointer;
   text-decoration: none;
@@ -349,6 +344,10 @@ body {
   color: white;
 }
 
+.text-begin {
+  font-size: 15vh;
+}
+
 .background {
   position: absolute;
   top: 0;
@@ -360,24 +359,24 @@ body {
 }
 
 .background-history {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: black;
-    opacity: 0;
-  }
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: black;
+  opacity: 0;
+}
 
 .background-compare {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: black;
-    opacity: 1;
-  }
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: black;
+  opacity: 1;
+}
 
 #element {
   font-family: "Inria Sans";
@@ -409,7 +408,7 @@ body {
   max-width: 442px;
   /* max-width: 1258px; */
   color: rgba(255, 255, 255, 1);
-  font-size: 70px;
+  font-size: 5vh;
   letter-spacing: 0%;
   text-align: left;
   font-family: "Inria Sans", sans-serif;
@@ -419,7 +418,7 @@ body {
   max-width: 1258px;
   margin-top: 75px;
   color: rgba(255, 255, 255, 1);
-  font-size: 70px;
+  font-size: 5vh;
   letter-spacing: 0%;
   text-align: center;
   font-family: "Inria Sans", sans-serif;
@@ -432,7 +431,7 @@ body {
     transition: all 0.5s ease-out;    
 } */
 canvas {
- transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
   opacity: 1;
 }
 .opacity-zero {
