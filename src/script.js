@@ -660,7 +660,7 @@ const tick = () => {
       document.getElementById("text2").style.textAlign = "center";
       document.getElementById("text2").style.maxWidth = "1258px";
       document.getElementById("text2").innerHTML =
-        "Facial recognition technology takes your face and transforms it into data points. The algorithm compares the data points and determines if there is a match";
+        "Facial recognition technology takes your face and transforms it into data points. The algorithm compares the data points and determines if there is a match.";
     }
     // -------------------- Scene 4
     if (elapsedTime > dictTimes1["Scene4"]) {
@@ -1274,7 +1274,7 @@ const tick = () => {
       if (elapsedTime > dictTimes1["Scene8"] + 10) {
         document.getElementById("text-final").style.fontSize = "6vh";
         document.getElementById("text-final").innerHTML =
-          "What happens if you don’t consent to your <br> photo being processed and it’s mislabeled <br> in the system forever?";
+          "What happens if you don’t consent to your photo being processed and it’s mislabeled in the system forever?";
         if (bouncingfont2 < 80) {
           document.getElementById(
             "text-final"
@@ -1305,7 +1305,7 @@ const tick = () => {
         div.style.color = "white";
         div.style.fontSize = "30px";
         div.innerHTML =
-          "As researchers like Joy Buolamwini discovered, this technology does not work <br>the same for all and is predominantly negative towards black women";
+          "As researchers like Joy Buolamwini discovered, this technology does not work <br>the same for all and is predominantly negative towards black women.";
 
         if (
           document.getElementById("Joy") == null &&

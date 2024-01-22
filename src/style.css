@@ -39,6 +39,10 @@
   /* margin-top: 200px; */
 }
 
+.text-final {
+  font-size: 6vh;
+}
+
 .pr {
   position: relative;
 }
